@@ -4,7 +4,7 @@
 
 # Site
 title: Reconding
-subtitle:blog
+subtitle: blog
 description:
 keywords:
 author: John Doe
@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: 
+url: https://yantao1995.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -42,7 +42,7 @@ highlight:
   enable: true
   line_number: true
   auto_detect: false
-  tab_replace:
+  tab_replace: 
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -73,12 +73,12 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: Material-X
+theme: hexo-theme-material-x
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
     type: git
     message: update
-    repo: git@github.com:yantao1995/yantao1995.github.io.git
+    repo: https://github.com/yantao1995/yantao1995.github.io
     branch: master
