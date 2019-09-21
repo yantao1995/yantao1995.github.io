@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Hello 3 | Record life</title>
+  <title>go slice | Record life</title>
   
   
 
@@ -270,7 +270,7 @@
   
     <h1 class="title">
       <a href="/2019/09/21/hello k8s/">
-        Hello 3
+        go slice
       </a>
     </h1>
   
@@ -311,9 +311,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/k8s/' rel="nofollow">
+    <a href='/categories/golang/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>k8s</p>
+      <p>golang</p>
     </a>
   </div>
 
@@ -353,20 +353,38 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h5 id="切片结构"><a href="#切片结构" class="headerlink" title="切片结构"></a>切片结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type slice struct &#123;  </span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    len   int</span><br><span class="line">    cap   int</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>Pointer：指向一个数组的指针</p>
+<p>len： 代表当前切片的长度</p>
+<p>cap ：是当前切片的容量，总是大于等于 len 。</p>
+<h5 id="切片创建"><a href="#切片创建" class="headerlink" title="切片创建"></a>切片创建</h5><pre><code>    //1.类型自动推导
+    s:=[]int{1,2,3,4}
+    fmt.Println(s, len(s), cap(s))
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    //2.借助make函数，格式为：make(切片类型，切片长度，切片容量)
+    s1:=make([]int,5,10)
+    fmt.Println(s1, len(s1), cap(s1))
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    //3.借助make函数，格式为：make(切片容量，切片长度)
+    s2:=make([]int,5)
+    fmt.Println(s2, len(s2), cap(s2))
+    //这种情况切片容量与切片长度相等
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    //4.通过现成的数组（或者切片）进行创建
+    a:=[5]int{1,2,3,4,5}
+    s3:=a[1:3:5]
+    fmt.Println(s3, len(s3), cap(s3))
 
+    ``` 
+##### 切片扩容 
+
+[扩容出处，简书博主： l_sivan](https://www.jianshu.com/p/303daad705a3)
+1. append单个元素，或者append少量的多个元素，这里的少量指double之后的容量能容纳，这样就会走以下扩容流程，不足1024，双倍扩容，超过1024的，1.25倍扩容。
+2. 若是append多个元素，且double后的容量不能容纳，直接使用预估的容量。
+3. 以上两个方法得到新容量后，均需要根据slice的类型size，算出新的容量所需的内存情况capmem，然后再进行capmem向上取整，得到新的所需内存，除上类型size，得到真正的最终容量,作为新的slice的容量。 
+
+</code></pre>
       </div>
       
         <br>
@@ -377,7 +395,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T11:10:38+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T17:47:32+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年9月21日</p>
@@ -388,6 +406,9 @@
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/go/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>go</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/slice/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>slice</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/切片/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>切片</p></a></div>
+
 
         
       
@@ -409,12 +430,17 @@
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/2019/09/21/hello java/" rel="prev" title="Hello 2">
+                              <a href="/2019/09/21/hello java/" rel="prev" title="go + mysql">
                                   
-                                      Hello 2
+                                      go + mysql
                                   
                               </a>
                           </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/golang/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> golang</a> <a class="tag" href="/tags/orm/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> orm</a> <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
+                              </h6>
                           
                       </span>
                   </section>
@@ -443,7 +469,7 @@
 
   <script>
     window.subData = {
-      title: 'Hello 3',
+      title: 'go slice',
       tools: true
     }
   </script>
@@ -526,7 +552,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#切片结构"><span class="toc-text">切片结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片创建"><span class="toc-text">切片创建</span></a></li></ol>
     </div>
   </section>
 
@@ -645,11 +671,9 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
         
       </ul>
     </div>
@@ -697,7 +721,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/测试标签/" style="font-size: 14px; color: #999">测试标签</a>
+      <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a>
     </div>
   </section>
 
