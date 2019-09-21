@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>go + mysql | Record life</title>
+  <title>go slice | Record life</title>
   
   
 
@@ -269,8 +269,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/09/21/hello java/">
-        go + mysql
+      <a href="/2019/09/20/hello k8s/">
+        go slice
       </a>
     </h1>
   
@@ -285,11 +285,11 @@
             
   <div class='new-meta-item author'>
     
-      <a href="/" rel="nofollow">
+      <a href="https://yantao1995.github.io" rel="nofollow">
         
           <i class="fas fa-user" aria-hidden="true"></i>
         
-        <p></p>
+        <p>Tany</p>
       </a>
     
   </div>
@@ -301,7 +301,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-21</p>
+    <p>2019-09-20</p>
   </a>
 </div>
 
@@ -353,30 +353,25 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h4 id="高级编程"><a href="#高级编程" class="headerlink" title="高级编程"></a>高级编程</h4><p><a href="https://chai2010.gitbooks.io/advanced-go-programming-book/content/" target="_blank" rel="noopener">https://chai2010.gitbooks.io/advanced-go-programming-book/content/</a></p>
-<h5 id="下载驱动包："><a href="#下载驱动包：" class="headerlink" title="下载驱动包："></a>下载驱动包：</h5><pre><code>$ go get github.com/go-sql-driver/mysql</code></pre><h6 id="（1）sql-Open-“mysql”-“username-pwd-databasename”"><a href="#（1）sql-Open-“mysql”-“username-pwd-databasename”" class="headerlink" title="（1）sql.Open(“mysql”, “username:pwd@/databasename”)"></a>（1）sql.Open(“mysql”, “username:pwd@/databasename”)</h6><p>功能：返回一个DB对象，DB对象对于多个goroutines并发使用是安全的，DB对象内部封装了连接池。</p>
-<p>实现：open函数并没有创建连接，它只是验证参数是否合法。然后开启一个单独goroutines去监听是否需要建立新的连接，当有请求建立新连接时就创建新连接。</p>
-<p>注意：open函数应该被调用一次，通常是没必要close的。</p>
-<h6 id="（2）DB-Exec"><a href="#（2）DB-Exec" class="headerlink" title="（2）DB.Exec()"></a>（2）DB.Exec()</h6><p>功能：执行不返回行（row）的查询，比如INSERT，UPDATE，DELETE</p>
-<p>实现：DB交给内部的exec方法负责查询。exec会首先调用DB内部的conn方法从连接池里面获得一个连接。然后检查内部的driver.Conn实现了Execer接口没有，如果实现了该接口，会调用Execer接口的Exec方法执行查询；否则调用Conn接口的Prepare方法负责查询。</p>
-<h6 id="（3）DB-Query"><a href="#（3）DB-Query" class="headerlink" title="（3）DB.Query()"></a>（3）DB.Query()</h6><p>功能：用于检索（retrieval），比如SELECT</p>
-<p>实现：DB交给内部的query方法负责查询。query首先调用DB内部的conn方法从连接池里面获得一个连接，然后调用内部的queryConn方法负责查询。</p>
-<h6 id="（4）DB-QueryRow"><a href="#（4）DB-QueryRow" class="headerlink" title="（4）DB.QueryRow()"></a>（4）DB.QueryRow()</h6><p>功能：用于返回单行的查询</p>
-<p>实现：转交给DB.Query()查询</p>
-<h6 id="（5）db-Prepare"><a href="#（5）db-Prepare" class="headerlink" title="（5）db.Prepare()"></a>（5）db.Prepare()</h6><p>功能：返回一个Stmt。Stmt对象可以执行Exec,Query,QueryRow等操作。</p>
-<p>实现：DB交给内部的prepare方法负责查询。prepare首先调用DB内部的conn方法从连接池里面获得一个连接，然后调用driverConn的prepareLocked方法负责查询。</p>
-<p>Stmt相关方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">st.Exec()</span><br><span class="line">st.Query()</span><br><span class="line">st.QueryRow()</span><br><span class="line">st.Close()</span><br></pre></td></tr></table></figure>
+        <h5 id="切片结构"><a href="#切片结构" class="headerlink" title="切片结构"></a>切片结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type slice struct &#123;  </span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    len   int</span><br><span class="line">    cap   int</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>Pointer：指向一个数组的指针</p>
+<p>len： 代表当前切片的长度</p>
+<p>cap ：是当前切片的容量，总是大于等于 len 。</p>
+<h5 id="切片创建"><a href="#切片创建" class="headerlink" title="切片创建"></a>切片创建</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//1.类型自动推导</span><br><span class="line">s:=[]int&#123;1,2,3,4&#125;</span><br><span class="line">fmt.Println(s, len(s), cap(s))</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//2.借助make函数，格式为：make(切片类型，切片长度，切片容量)</span><br><span class="line">s1:=make([]int,5,10)</span><br><span class="line">fmt.Println(s1, len(s1), cap(s1))</span><br></pre></td></tr></table></figure>
 
-<h6 id="（6）db-Begin"><a href="#（6）db-Begin" class="headerlink" title="（6）db.Begin()"></a>（6）db.Begin()</h6><p>功能：开启事务，返回Tx对象。调用该方法后，这个TX就和指定的连接绑定在一起了。一旦事务提交或者回滚，该事务绑定的连接就还给DB的连接池。</p>
-<p>实现：DB交给内部的begin方法负责处理。begin首先调用DB内部的conn方法从连接池里面获得一个连接，然后调用Conn接口的Begin方法获得一个TX。</p>
-<p>TX相关方法：</p>
-<p>//内部执行流程和上面那些差不多，只是没有先去获取连接的一步，因为这些操作是和TX关联的，Tx建立的时候就和一个连接绑定了，所以这些操作内部共用一个TX内部的连接。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tx.Exec() </span><br><span class="line">tx.Query()</span><br><span class="line">tx.QueryRow()</span><br><span class="line">tx.Prepare()</span><br><span class="line">tx.Commit()</span><br><span class="line">tx.Rollback()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//3.借助make函数，格式为：make(切片容量，切片长度)</span><br><span class="line">s2:=make([]int,5)</span><br><span class="line">fmt.Println(s2, len(s2), cap(s2))</span><br><span class="line">//这种情况切片容量与切片长度相等</span><br></pre></td></tr></table></figure>
 
-<p>tx.Stmt()//用于将一个已存在的statement和tx绑定在一起。一个statement可以不和tx关联，比如db.Prepare()返回的statement就没有和TX关联。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//4.通过现成的数组（或者切片）进行创建</span><br><span class="line">a:=[5]int&#123;1,2,3,4,5&#125;</span><br><span class="line">s3:=a[1:3:5]</span><br><span class="line">fmt.Println(s3, len(s3), cap(s3))</span><br></pre></td></tr></table></figure>
+
+<h5 id="切片扩容"><a href="#切片扩容" class="headerlink" title="切片扩容"></a>切片扩容</h5><p><a href="https://www.jianshu.com/p/303daad705a3" target="_blank" rel="noopener">扩容出处，简书博主： l_sivan</a></p>
+<ol>
+<li>append单个元素，或者append少量的多个元素，这里的少量指double之后的容量能容纳，这样就会走以下扩容流程，不足1024，双倍扩容，超过1024的，1.25倍扩容。</li>
+<li>若是append多个元素，且double后的容量不能容纳，直接使用预估的容量。</li>
+<li>以上两个方法得到新容量后，均需要根据slice的类型size，算出新的容量所需的内存情况capmem，然后再进行capmem向上取整，得到新的所需内存，除上类型size，得到真正的最终容量,作为新的slice的容量。</li>
+</ol>
 
       </div>
       
@@ -388,7 +383,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T17:14:22+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T18:52:00+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年9月21日</p>
@@ -400,7 +395,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/golang/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>golang</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/orm/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>orm</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/mysql/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>mysql</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/go/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>go</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/slice/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>slice</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/切片/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>切片</p></a></div>
 
 
         
@@ -418,40 +413,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/2019/09/21/hello k8s/" rel="prev" title="go slice">
-                                
-                                    go slice
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/go/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> go</a> <a class="tag" href="/tags/slice/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> slice</a> <a class="tag" href="/tags/切片/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 切片</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/2019/09/11/hello-world/" rel="prev" title="java相关的技术经验汇总">
+                              <a href="/2019/09/12/hello java/" rel="prev" title="go + mysql">
                                   
-                                      java相关的技术经验汇总
+                                      go + mysql
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> java</a> <a class="tag" href="/tags/spring/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> spring</a> <a class="tag" href="/tags/并发/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 并发</a>
+                                  <a class="tag" href="/tags/golang/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> golang</a> <a class="tag" href="/tags/orm/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> orm</a> <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
                               </h6>
                           
                       </span>
@@ -481,7 +457,7 @@
 
   <script>
     window.subData = {
-      title: 'go + mysql',
+      title: 'go slice',
       tools: true
     }
   </script>
@@ -564,7 +540,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#高级编程"><span class="toc-text">高级编程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#下载驱动包："><span class="toc-text">下载驱动包：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#（1）sql-Open-“mysql”-“username-pwd-databasename”"><span class="toc-text">（1）sql.Open(“mysql”, “username:pwd@/databasename”)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#（2）DB-Exec"><span class="toc-text">（2）DB.Exec()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#（3）DB-Query"><span class="toc-text">（3）DB.Query()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#（4）DB-QueryRow"><span class="toc-text">（4）DB.QueryRow()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#（5）db-Prepare"><span class="toc-text">（5）db.Prepare()</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#（6）db-Begin"><span class="toc-text">（6）db.Begin()</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#切片结构"><span class="toc-text">切片结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片创建"><span class="toc-text">切片创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片扩容"><span class="toc-text">切片扩容</span></a></li></ol>
     </div>
   </section>
 
@@ -784,6 +760,12 @@
 </aside>
 
 <footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p>扬帆起航的小白一枚</p>
+
+    </div>
+    <br>
   
   
     <div class="social-wrapper">
