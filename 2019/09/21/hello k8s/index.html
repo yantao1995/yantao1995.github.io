@@ -358,33 +358,30 @@
 <p>Pointer：指向一个数组的指针</p>
 <p>len： 代表当前切片的长度</p>
 <p>cap ：是当前切片的容量，总是大于等于 len 。</p>
-<h5 id="切片创建"><a href="#切片创建" class="headerlink" title="切片创建"></a>切片创建</h5><pre><code>    //1.类型自动推导
-    s:=[]int{1,2,3,4}
-    fmt.Println(s, len(s), cap(s))
+<h5 id="切片创建"><a href="#切片创建" class="headerlink" title="切片创建"></a>切片创建</h5><pre><code>//1.类型自动推导
+s:=[]int{1,2,3,4}
+fmt.Println(s, len(s), cap(s))
 
-    //2.借助make函数，格式为：make(切片类型，切片长度，切片容量)
-    s1:=make([]int,5,10)
-    fmt.Println(s1, len(s1), cap(s1))
+//2.借助make函数，格式为：make(切片类型，切片长度，切片容量)
+s1:=make([]int,5,10)
+fmt.Println(s1, len(s1), cap(s1))
 
-    //3.借助make函数，格式为：make(切片容量，切片长度)
-    s2:=make([]int,5)
-    fmt.Println(s2, len(s2), cap(s2))
-    //这种情况切片容量与切片长度相等
+//3.借助make函数，格式为：make(切片容量，切片长度)
+s2:=make([]int,5)
+fmt.Println(s2, len(s2), cap(s2))
+//这种情况切片容量与切片长度相等
 
-    //4.通过现成的数组（或者切片）进行创建
-    a:=[5]int{1,2,3,4,5}
-    s3:=a[1:3:5]
-    fmt.Println(s3, len(s3), cap(s3))
+//4.通过现成的数组（或者切片）进行创建
+a:=[5]int{1,2,3,4,5}
+s3:=a[1:3:5]
+fmt.Println(s3, len(s3), cap(s3))
+</code></pre><h5 id="切片扩容"><a href="#切片扩容" class="headerlink" title="切片扩容"></a>切片扩容</h5><p><a href="https://www.jianshu.com/p/303daad705a3" target="_blank" rel="noopener">扩容出处，简书博主： l_sivan</a></p>
+<ol>
+<li>append单个元素，或者append少量的多个元素，这里的少量指double之后的容量能容纳，这样就会走以下扩容流程，不足1024，双倍扩容，超过1024的，1.25倍扩容。</li>
+<li>若是append多个元素，且double后的容量不能容纳，直接使用预估的容量。</li>
+<li>以上两个方法得到新容量后，均需要根据slice的类型size，算出新的容量所需的内存情况capmem，然后再进行capmem向上取整，得到新的所需内存，除上类型size，得到真正的最终容量,作为新的slice的容量。</li>
+</ol>
 
-    ``` 
-##### 切片扩容 
-
-[扩容出处，简书博主： l_sivan](https://www.jianshu.com/p/303daad705a3)
-1. append单个元素，或者append少量的多个元素，这里的少量指double之后的容量能容纳，这样就会走以下扩容流程，不足1024，双倍扩容，超过1024的，1.25倍扩容。
-2. 若是append多个元素，且double后的容量不能容纳，直接使用预估的容量。
-3. 以上两个方法得到新容量后，均需要根据slice的类型size，算出新的容量所需的内存情况capmem，然后再进行capmem向上取整，得到新的所需内存，除上类型size，得到真正的最终容量,作为新的slice的容量。 
-
-</code></pre>
       </div>
       
         <br>
@@ -395,7 +392,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T17:47:32+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T17:54:33+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年9月21日</p>
@@ -424,6 +421,25 @@
       
       
           <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2019/09/21/clair镜像扫描/" rel="prev" title="clair镜像扫描">
+                                
+                                    clair镜像扫描
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/k8s/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> k8s</a> <a class="tag" href="/tags/clair/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> clair</a> <a class="tag" href="/tags/镜像扫描/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 镜像扫描</a> <a class="tag" href="/tags/docker/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> docker</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
               
               
                   <section class="next">
@@ -552,7 +568,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#切片结构"><span class="toc-text">切片结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片创建"><span class="toc-text">切片创建</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#切片结构"><span class="toc-text">切片结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片创建"><span class="toc-text">切片创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片扩容"><span class="toc-text">切片扩容</span></a></li></ol>
     </div>
   </section>
 
@@ -675,6 +691,8 @@
         
           <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
         
+          <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
+        
       </ul>
     </div>
   </section>
@@ -721,7 +739,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a>
+      <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
     </div>
   </section>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Untitled | Record life</title>
+  <title>clair镜像扫描 | Record life</title>
   
   
 
@@ -44,7 +44,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover page half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Record life</h1>
@@ -257,7 +257,7 @@
       <div class='l_main'>
   
 
-  <article id="page" class="post white-box article-type-page" itemscope itemprop="blogPost">
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
 
 
@@ -269,8 +269,8 @@
         
   
     <h1 class="title">
-      <a href="/Untitled/index.html">
-        Untitled
+      <a href="/2019/09/21/clair镜像扫描/">
+        clair镜像扫描
       </a>
     </h1>
   
@@ -285,11 +285,11 @@
             
   <div class='new-meta-item author'>
     
-      <a href="https://yantao1995.github.io" rel="nofollow">
+      <a href="/" rel="nofollow">
         
           <i class="fas fa-user" aria-hidden="true"></i>
         
-        <p>Tany</p>
+        <p></p>
       </a>
     
   </div>
@@ -309,6 +309,14 @@
         
           
             
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/k8s/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>k8s</p>
+    </a>
+  </div>
+
 
           
         
@@ -345,9 +353,95 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        
+        <h4 id="cliar简介"><a href="#cliar简介" class="headerlink" title="cliar简介"></a>cliar简介</h4><p>Clair是一个开源工具，用于扫描Docker镜像的漏洞。</p>
+<p>Clair没有Web端，也没有命令行工具。只能通过REST API或第三方CLI工具。</p>
+<p> 获取clair镜像：<code>docker pull quay.io/coreos/clair</code></p>
+<h4 id="镜像简介"><a href="#镜像简介" class="headerlink" title="镜像简介"></a>镜像简介</h4><p>docker镜像由 1+n层组成，每一层都是tar文件块存储在docker注册表里。</p>
+<h4 id="需要的工具"><a href="#需要的工具" class="headerlink" title="需要的工具"></a>需要的工具</h4><ol>
+<li>clair<ol>
+<li>REST API服务</li>
+<li>CVE Updater 更新漏洞数据库</li>
+<li>CVE 数据源列表</li>
+</ol>
+</li>
+<li>postgreSQL 数据库<ol>
+<li>存储漏洞信息</li>
+<li>上传docker镜像分析结果</li>
+</ol>
+</li>
+</ol>
+<p>cliar：<a href="https://coreos.com/clair/docs/latest/api_v1.html" target="_blank" rel="noopener">api_v1官方文档</a></p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><ol>
+<li>POST/layers    将docker镜像层推送到Clair进行分析</li>
+<li>GET/layers/:name   获取已发现漏洞的Docker镜像层的信息</li>
+</ol>
+<h4 id="k8s集群内配置文件"><a href="#k8s集群内配置文件" class="headerlink" title="k8s集群内配置文件"></a>k8s集群内配置文件</h4><ol>
+<li><a href="https://raw.githubusercontent.com/coreos/clair/master/config.yaml.sample" target="_blank" rel="noopener">clair_config/config.yaml</a> </li>
+<li>docker-compose.yaml (一键启动两个工具)</li>
+</ol>
+<p>参考：<a href="https://www.nearform.com/blog/static-analysis-of-docker-image-vulnerabilities-with-clair/" target="_blank" rel="noopener">Static Analysis of Docker image vulnerabilities with Clair</a></p>
+
       </div>
       
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T18:29:41+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年9月21日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/k8s/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>k8s</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/clair/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>clair</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/镜像扫描/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>镜像扫描</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/docker/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>docker</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2019/09/21/hello k8s/" rel="prev" title="go slice">
+                                  
+                                      go slice
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/go/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> go</a> <a class="tag" href="/tags/slice/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> slice</a> <a class="tag" href="/tags/切片/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 切片</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
       
     </section>
   </article>
@@ -368,6 +462,13 @@
 <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
 
+
+  <script>
+    window.subData = {
+      title: 'clair镜像扫描',
+      tools: true
+    }
+  </script>
 
 
 </div>
@@ -437,6 +538,20 @@
           
             
               
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#cliar简介"><span class="toc-text">cliar简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#镜像简介"><span class="toc-text">镜像简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#需要的工具"><span class="toc-text">需要的工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接口"><span class="toc-text">接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#k8s集群内配置文件"><span class="toc-text">k8s集群内配置文件</span></a></li></ol>
+    </div>
+  </section>
+
 
             
           
