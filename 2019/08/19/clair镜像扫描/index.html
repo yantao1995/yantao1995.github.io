@@ -353,7 +353,10 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h4 id="cliar简介"><a href="#cliar简介" class="headerlink" title="cliar简介"></a>cliar简介</h4><p>Clair是一个开源工具，用于扫描Docker镜像的漏洞。</p>
+        <p>clair简介，docker镜像简介，准备工作</p>
+<a id="more"></a>
+
+<h4 id="cliar简介"><a href="#cliar简介" class="headerlink" title="cliar简介"></a>cliar简介</h4><p>Clair是一个开源工具，用于扫描Docker镜像的漏洞。</p>
 <p>Clair没有Web端，也没有命令行工具。只能通过REST API或第三方CLI工具。</p>
 <p> 获取clair镜像：<code>docker pull quay.io/coreos/clair</code></p>
 <h4 id="镜像简介"><a href="#镜像简介" class="headerlink" title="镜像简介"></a>镜像简介</h4><p>docker镜像由 1+n层组成，每一层都是tar文件块存储在docker注册表里。</p>
@@ -377,7 +380,7 @@
 </ol>
 <h4 id="k8s集群内配置文件"><a href="#k8s集群内配置文件" class="headerlink" title="k8s集群内配置文件"></a>k8s集群内配置文件</h4><ol>
 <li><a href="https://raw.githubusercontent.com/coreos/clair/master/config.yaml.sample" target="_blank" rel="noopener">clair_config/config.yaml</a> </li>
-<li>docker-compose.yaml (一键启动两个工具)</li>
+<li>docker-compose.yaml (docker-compose up/down)</li>
 </ol>
 <p>参考：<a href="https://www.nearform.com/blog/static-analysis-of-docker-image-vulnerabilities-with-clair/" target="_blank" rel="noopener">Static Analysis of Docker image vulnerabilities with Clair</a></p>
 
@@ -391,10 +394,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T18:47:03+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-22T11:21:40+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年9月21日</p>
+    <p>更新于 2019年9月22日</p>
   </a>
 </div>
 

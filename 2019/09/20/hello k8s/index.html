@@ -353,7 +353,10 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h5 id="切片结构"><a href="#切片结构" class="headerlink" title="切片结构"></a>切片结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type slice struct &#123;  </span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    len   int</span><br><span class="line">    cap   int</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>切片的结构，创建，扩容</p>
+<a id="more"></a>
+
+<h5 id="切片结构"><a href="#切片结构" class="headerlink" title="切片结构"></a>切片结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type slice struct &#123;  </span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    len   int</span><br><span class="line">    cap   int</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Pointer：指向一个数组的指针</p>
 <p>len： 代表当前切片的长度</p>
@@ -383,10 +386,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T18:52:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-22T11:23:04+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年9月21日</p>
+    <p>更新于 2019年9月22日</p>
   </a>
 </div>
 

@@ -353,7 +353,10 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h4 id="高级编程"><a href="#高级编程" class="headerlink" title="高级编程"></a>高级编程</h4><p><a href="https://chai2010.gitbooks.io/advanced-go-programming-book/content/" target="_blank" rel="noopener">https://chai2010.gitbooks.io/advanced-go-programming-book/content/</a></p>
+        <p>go对mysql导入，增删改查。</p>
+<a id="more"></a>
+
+<h4 id="高级编程"><a href="#高级编程" class="headerlink" title="高级编程"></a>高级编程</h4><p><a href="https://chai2010.gitbooks.io/advanced-go-programming-book/content/" target="_blank" rel="noopener">https://chai2010.gitbooks.io/advanced-go-programming-book/content/</a></p>
 <h5 id="下载驱动包："><a href="#下载驱动包：" class="headerlink" title="下载驱动包："></a>下载驱动包：</h5><pre><code>$ go get github.com/go-sql-driver/mysql</code></pre><h6 id="（1）sql-Open-“mysql”-“username-pwd-databasename”"><a href="#（1）sql-Open-“mysql”-“username-pwd-databasename”" class="headerlink" title="（1）sql.Open(“mysql”, “username:pwd@/databasename”)"></a>（1）sql.Open(“mysql”, “username:pwd@/databasename”)</h6><p>功能：返回一个DB对象，DB对象对于多个goroutines并发使用是安全的，DB对象内部封装了连接池。</p>
 <p>实现：open函数并没有创建连接，它只是验证参数是否合法。然后开启一个单独goroutines去监听是否需要建立新的连接，当有请求建立新连接时就创建新连接。</p>
 <p>注意：open函数应该被调用一次，通常是没必要close的。</p>
@@ -388,10 +391,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-21T18:47:23+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-22T11:22:43+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年9月21日</p>
+    <p>更新于 2019年9月22日</p>
   </a>
 </div>
 
