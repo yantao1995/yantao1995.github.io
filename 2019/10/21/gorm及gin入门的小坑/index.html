@@ -360,6 +360,12 @@
 <li>mysql数据库的 datetime 字段，在结构体中定义类型为 time.Time 的可以接收。</li>
 <li>gorm映射时<code>gorm:&quot;column:date&quot;</code> 不加column有时会导致某些字段无法正确映射，int类型字段可以映射，但string，datetime等字段无法完成映射。</li>
 </ul>
+<h6 id="gin接收-GET-请求的参数"><a href="#gin接收-GET-请求的参数" class="headerlink" title="gin接收 GET 请求的参数"></a>gin接收 GET 请求的参数</h6> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r := gin.Default()</span><br><span class="line">  r.GET(&quot;/ping&quot;, func(c *gin.Context) &#123;</span><br><span class="line">     param1 := c.GetString(&quot;param1&quot;)</span><br><span class="line">     param2 := c.Query(&quot;param2&quot;)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此时的param1为空值 “”</li>
+<li>此时的param2能正常获取到参数</li>
+</ul>
 
       </div>
       
@@ -371,10 +377,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-21T23:07:46+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-22T22:36:41+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月21日</p>
+    <p>更新于 2019年10月22日</p>
   </a>
 </div>
 
@@ -400,6 +406,25 @@
       
       
           <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2019/10/22/go-redis入门及小坑/" rel="prev" title="go-redis入门及小坑">
+                                
+                                    go-redis入门及小坑
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/go/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> go</a> <a class="tag" href="/tags/redis/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> redis</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
               
               
                   <section class="next">
@@ -528,7 +553,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm结构体映射及json构造映射"><span class="toc-text">gorm结构体映射及json构造映射</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm结构体映射及json构造映射"><span class="toc-text">gorm结构体映射及json构造映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收-GET-请求的参数"><span class="toc-text">gin接收 GET 请求的参数</span></a></li></ol>
     </div>
   </section>
 
@@ -653,6 +678,8 @@
         
           <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
         
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class='name'>redis</div><div class='badge'>(1)</div></a></li>
+        
       </ul>
     </div>
   </section>
@@ -699,7 +726,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
+      <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
     </div>
   </section>
 
