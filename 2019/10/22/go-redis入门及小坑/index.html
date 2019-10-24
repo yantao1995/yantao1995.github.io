@@ -355,7 +355,9 @@
       <div class="article-entry" itemprop="articleBody">
         <h6 id="创建redis-client-对象"><a href="#创建redis-client-对象" class="headerlink" title="创建redis-client 对象"></a>创建redis-client 对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">        Addr:     &quot;localhost:6379&quot;, //地址：端口</span><br><span class="line">        Password: &quot;&quot;, //密码没有可不填</span><br><span class="line">        DB:       0, //库号</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 
+<h6 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set 成功返回 &quot;OK&quot; 失败返回 &quot;ERR syntax error&quot;</span><br><span class="line">hset 成功返回 &quot;1&quot; 失败返回 &quot;err&quot;</span><br></pre></td></tr></table></figure>
 
+<h6 id="redis简单操作"><a href="#redis简单操作" class="headerlink" title="redis简单操作"></a>redis简单操作</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hmset 可以实现 n次 hset的操作</span><br></pre></td></tr></table></figure>
       </div>
       
         <br>
@@ -366,10 +368,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-22T22:45:55+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-24T23:13:08+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月22日</p>
+    <p>更新于 2019年10月24日</p>
   </a>
 </div>
 
@@ -395,6 +397,25 @@
       
       
           <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2019/10/24/go日常/" rel="prev" title="go日常踩坑">
+                                
+                                    go日常踩坑
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/go/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> go</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
               
               
                   <section class="next">
@@ -523,7 +544,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建redis-client-对象"><span class="toc-text">创建redis-client 对象</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建redis-client-对象"><span class="toc-text">创建redis-client 对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#redis简单操作"><span class="toc-text">redis简单操作</span></a></li></ol>
     </div>
   </section>
 
@@ -641,6 +662,8 @@
 
     <div class='content pure'>
       <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class='name'>go</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(3)</div></a></li>
         
