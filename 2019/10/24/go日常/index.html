@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>go日常踩坑 | Record life</title>
+  <title>go踩坑日记 | Record life</title>
   
   
 
@@ -270,7 +270,7 @@
   
     <h1 class="title">
       <a href="/2019/10/24/go日常/">
-        go日常踩坑
+        go踩坑日记
       </a>
     </h1>
   
@@ -354,6 +354,12 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <h5 id="常用类型转换"><a href="#常用类型转换" class="headerlink" title="常用类型转换"></a>常用类型转换</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int转string            strconv.Itoa()  //int float string 互转用strconv包</span><br><span class="line">[]byte/byte 转string   string([]byte/byte) </span><br><span class="line">interface&#123;&#125;转 string   interface&#123;&#125;.(string)</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="切片元素删除"><a href="#切片元素删除" class="headerlink" title="切片元素删除"></a>切片元素删除</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">t := []string&#123;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;&#125;</span><br><span class="line"></span><br><span class="line">    for i := 0; i &lt; len(t); i++ &#123;</span><br><span class="line">        if t[i] == &quot;c&quot; || t[i] == &quot;c&quot; || t[i] == &quot;d&quot; &#123;</span><br><span class="line">            // 将删除点前后的元素连接起来</span><br><span class="line">            fmt.Println(i, t[i])</span><br><span class="line">            t = append(t[:i], t[i+1:]...)</span><br><span class="line">            i--</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(i)</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(&quot;----------&quot;)</span><br><span class="line">    for i := 0; i &lt; len(t); i++ &#123;</span><br><span class="line">        fmt.Println(i, t[i])</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>元素删除后使用i- - 将遍历位置切换到连接点。<br>否则会出<code>panic: index of range</code>。</p>
+
       </div>
       
         <br>
@@ -364,10 +370,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-24T23:17:57+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-27T18:07:33+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月24日</p>
+    <p>更新于 2019年10月27日</p>
   </a>
 </div>
 
@@ -399,9 +405,9 @@
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/2019/10/22/go-redis入门及小坑/" rel="prev" title="go-redis入门及小坑">
+                              <a href="/2019/10/22/go-redis入门及小坑/" rel="prev" title="go-redis入门及踩坑日记">
                                   
-                                      go-redis入门及小坑
+                                      go-redis入门及踩坑日记
                                   
                               </a>
                           </h4>
@@ -438,7 +444,7 @@
 
   <script>
     window.subData = {
-      title: 'go日常踩坑',
+      title: 'go踩坑日记',
       tools: true
     }
   </script>
@@ -521,7 +527,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li></ol>
     </div>
   </section>
 
@@ -639,8 +645,6 @@
 
     <div class='content pure'>
       <ul class="entry">
-        
-          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class='name'>go</div><div class='badge'>(0)</div></a></li>
         
           <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(4)</div></a></li>
         

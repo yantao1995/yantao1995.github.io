@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>gorm及gin入门的小坑 | Record life</title>
+  <title>gorm及gin入门及踩坑日记 | Record life</title>
   
   
 
@@ -270,7 +270,7 @@
   
     <h1 class="title">
       <a href="/2019/10/21/gorm及gin入门的小坑/">
-        gorm及gin入门的小坑
+        gorm及gin入门及踩坑日记
       </a>
     </h1>
   
@@ -372,7 +372,9 @@
 <li>此时的name能正常获取到参数</li>
 <li>此时的message为空值””</li>
 </ul>
-<h6 id="gin设置头部"><a href="#gin设置头部" class="headerlink" title="gin设置头部"></a>gin设置头部</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c := *gin.Context</span><br><span class="line">c.Set(&quot;content-type&quot;, &quot;application/json&quot;)</span><br><span class="line">无效时使用 c.Request.Header(&quot;content-type&quot;, &quot;application/json&quot;)</span><br></pre></td></tr></table></figure>
+<h6 id="gin设置头部-返回内容为json"><a href="#gin设置头部-返回内容为json" class="headerlink" title="gin设置头部 返回内容为json"></a>gin设置头部 返回内容为json</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c := *gin.Context</span><br><span class="line">c.Set(&quot;content-type&quot;, &quot;application/json&quot;)</span><br><span class="line">无效时使用 c.Header(&quot;content-type&quot;, &quot;application/json&quot;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="gorm-更新表的坑"><a href="#gorm-更新表的坑" class="headerlink" title="gorm 更新表的坑"></a>gorm 更新表的坑</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 警告:当使用struct更新时，FORM将仅更新具有非空值的字段</span><br><span class="line">// 对于下面的更新，什么都不会更新为&quot;&quot;，0，false是其类型的空白值</span><br><span class="line">db.Model(&amp;user).Updates(User&#123;Name: &quot;&quot;, Age: 0, Actived: false&#125;)</span><br></pre></td></tr></table></figure>
       </div>
       
         <br>
@@ -383,10 +385,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-24T23:07:44+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-27T18:07:01+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月24日</p>
+    <p>更新于 2019年10月27日</p>
   </a>
 </div>
 
@@ -417,9 +419,9 @@
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/2019/10/22/go-redis入门及小坑/" rel="prev" title="go-redis入门及小坑">
+                              <a href="/2019/10/22/go-redis入门及小坑/" rel="prev" title="go-redis入门及踩坑日记">
                                 
-                                    go-redis入门及小坑
+                                    go-redis入门及踩坑日记
                                 
                               </a>
                           </h4>
@@ -476,7 +478,7 @@
 
   <script>
     window.subData = {
-      title: 'gorm及gin入门的小坑',
+      title: 'gorm及gin入门及踩坑日记',
       tools: true
     }
   </script>
@@ -559,7 +561,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm结构体映射及json构造映射"><span class="toc-text">gorm结构体映射及json构造映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收-GET-请求的参数"><span class="toc-text">gin接收 GET 请求的参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收POST请求参数"><span class="toc-text">gin接收POST请求参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin设置头部"><span class="toc-text">gin设置头部</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm结构体映射及json构造映射"><span class="toc-text">gorm结构体映射及json构造映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收-GET-请求的参数"><span class="toc-text">gin接收 GET 请求的参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收POST请求参数"><span class="toc-text">gin接收POST请求参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin设置头部-返回内容为json"><span class="toc-text">gin设置头部 返回内容为json</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm-更新表的坑"><span class="toc-text">gorm 更新表的坑</span></a></li></ol>
     </div>
   </section>
 
@@ -677,8 +679,6 @@
 
     <div class='content pure'>
       <ul class="entry">
-        
-          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class='name'>go</div><div class='badge'>(0)</div></a></li>
         
           <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(4)</div></a></li>
         

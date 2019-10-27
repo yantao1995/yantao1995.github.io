@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>go-redis入门及小坑 | Record life</title>
+  <title>go-redis入门及踩坑日记 | Record life</title>
   
   
 
@@ -270,7 +270,7 @@
   
     <h1 class="title">
       <a href="/2019/10/22/go-redis入门及小坑/">
-        go-redis入门及小坑
+        go-redis入门及踩坑日记
       </a>
     </h1>
   
@@ -358,6 +358,13 @@
 <h6 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set 成功返回 &quot;OK&quot; 失败返回 &quot;ERR syntax error&quot;</span><br><span class="line">hset 成功返回 &quot;1&quot; 失败返回 &quot;err&quot;</span><br></pre></td></tr></table></figure>
 
 <h6 id="redis简单操作"><a href="#redis简单操作" class="headerlink" title="redis简单操作"></a>redis简单操作</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hmset 可以实现 n次 hset的操作</span><br></pre></td></tr></table></figure>
+
+<h6 id="get存取值判断"><a href="#get存取值判断" class="headerlink" title="get存取值判断"></a>get存取值判断</h6><ul>
+<li>Get() 取值 判断是否为空  val == “” 用空串比较<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redis 存到期时间的值 id := &quot;4001025061&quot;</span><br><span class="line">    rc.SetNX(id, &quot;1&quot;, 10*time.Second) // key  value  timeout</span><br><span class="line">    times2, err := rc.Get(id).Result()</span><br><span class="line">    if err != nil &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line">    if times2 == &quot;&quot; &#123;</span><br><span class="line">        fmt.Println(&quot;值等于 nil&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
       </div>
       
         <br>
@@ -368,10 +375,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-24T23:13:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-27T18:06:37+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月24日</p>
+    <p>更新于 2019年10月27日</p>
   </a>
 </div>
 
@@ -402,9 +409,9 @@
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/2019/10/24/go日常/" rel="prev" title="go日常踩坑">
+                              <a href="/2019/10/24/go日常/" rel="prev" title="go踩坑日记">
                                 
-                                    go日常踩坑
+                                    go踩坑日记
                                 
                               </a>
                           </h4>
@@ -422,9 +429,9 @@
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/2019/10/21/gorm及gin入门的小坑/" rel="prev" title="gorm及gin入门的小坑">
+                              <a href="/2019/10/21/gorm及gin入门的小坑/" rel="prev" title="gorm及gin入门及踩坑日记">
                                   
-                                      gorm及gin入门的小坑
+                                      gorm及gin入门及踩坑日记
                                   
                               </a>
                           </h4>
@@ -461,7 +468,7 @@
 
   <script>
     window.subData = {
-      title: 'go-redis入门及小坑',
+      title: 'go-redis入门及踩坑日记',
       tools: true
     }
   </script>
@@ -544,7 +551,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建redis-client-对象"><span class="toc-text">创建redis-client 对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#redis简单操作"><span class="toc-text">redis简单操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建redis-client-对象"><span class="toc-text">创建redis-client 对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#redis简单操作"><span class="toc-text">redis简单操作</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#get存取值判断"><span class="toc-text">get存取值判断</span></a></li></ol>
     </div>
   </section>
 
@@ -662,8 +669,6 @@
 
     <div class='content pure'>
       <ul class="entry">
-        
-          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class='name'>go</div><div class='badge'>(0)</div></a></li>
         
           <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(4)</div></a></li>
         
