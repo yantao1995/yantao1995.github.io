@@ -375,6 +375,11 @@
 <h6 id="gin设置头部-返回内容为json"><a href="#gin设置头部-返回内容为json" class="headerlink" title="gin设置头部 返回内容为json"></a>gin设置头部 返回内容为json</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c := *gin.Context</span><br><span class="line">c.Set(&quot;content-type&quot;, &quot;application/json&quot;)</span><br><span class="line">无效时使用 c.Header(&quot;content-type&quot;, &quot;application/json&quot;)</span><br></pre></td></tr></table></figure>
 
 <h6 id="gorm-更新表的坑"><a href="#gorm-更新表的坑" class="headerlink" title="gorm 更新表的坑"></a>gorm 更新表的坑</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 警告:当使用struct更新时，FORM将仅更新具有非空值的字段</span><br><span class="line">// 对于下面的更新，什么都不会更新为&quot;&quot;，0，false是其类型的空白值</span><br><span class="line">db.Model(&amp;user).Updates(User&#123;Name: &quot;&quot;, Age: 0, Actived: false&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="gin文件下载"><a href="#gin文件下载" class="headerlink" title="gin文件下载"></a>gin文件下载</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c.File(filepath+filename)</span><br></pre></td></tr></table></figure>
+
+<h6 id="gorm-多库联合查询"><a href="#gorm-多库联合查询" class="headerlink" title="gorm 多库联合查询"></a>gorm 多库联合查询</h6><p>指定库名，比如 <code>demo.test_t1</code> 表名前加库名</p>
+
       </div>
       
         <br>
@@ -385,10 +390,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-27T18:07:01+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-02T23:41:21+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月27日</p>
+    <p>更新于 2019年11月2日</p>
   </a>
 </div>
 
@@ -561,7 +566,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm结构体映射及json构造映射"><span class="toc-text">gorm结构体映射及json构造映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收-GET-请求的参数"><span class="toc-text">gin接收 GET 请求的参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收POST请求参数"><span class="toc-text">gin接收POST请求参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin设置头部-返回内容为json"><span class="toc-text">gin设置头部 返回内容为json</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm-更新表的坑"><span class="toc-text">gorm 更新表的坑</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm结构体映射及json构造映射"><span class="toc-text">gorm结构体映射及json构造映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收-GET-请求的参数"><span class="toc-text">gin接收 GET 请求的参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin接收POST请求参数"><span class="toc-text">gin接收POST请求参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin设置头部-返回内容为json"><span class="toc-text">gin设置头部 返回内容为json</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm-更新表的坑"><span class="toc-text">gorm 更新表的坑</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gin文件下载"><span class="toc-text">gin文件下载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gorm-多库联合查询"><span class="toc-text">gorm 多库联合查询</span></a></li></ol>
     </div>
   </section>
 
