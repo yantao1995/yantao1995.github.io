@@ -369,6 +369,15 @@
 <li>使用make初始化之后json为： <code>{&quot;Name&quot;:&quot;&quot;,&quot;ID&quot;:0,&quot;Stu&quot;:[]}</code></li>
 </ul>
 <h5 id="windows下使用阿里云代理包下载"><a href="#windows下使用阿里云代理包下载" class="headerlink" title="windows下使用阿里云代理包下载"></a>windows下使用阿里云代理包下载</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$env:GO111MODULE=&quot;on&quot;</span><br><span class="line">$env:GOPROXY=&quot;https://mirrors.aliyun.com/goproxy/&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Inf-阶码溢出"><a href="#Inf-阶码溢出" class="headerlink" title="Inf 阶码溢出"></a>Inf 阶码溢出</h5><ul>
+<li>inf前面带+-符号的，代码高位溢出。小数点位后面无限大。</li>
+<li>解决方法：使用fmt.Sprintf(“%0.2f”,浮点数) 输出一个字符串的固定位的浮点数，在把这个字符串转为float。</li>
+</ul>
+<h5 id="nohup文件过大"><a href="#nohup文件过大" class="headerlink" title="nohup文件过大"></a>nohup文件过大</h5><ul>
+<li>清空：方法1 <code>cp /dev/null nohup.out</code> ，方法2 <code>cat /dev/null &gt; nohup.out</code></li>
+</ul>
+
       </div>
       
         <br>
@@ -379,10 +388,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-02T23:42:29+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-04T19:11:42+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月2日</p>
+    <p>更新于 2019年11月4日</p>
   </a>
 </div>
 
@@ -536,7 +545,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li></ol>
     </div>
   </section>
 
