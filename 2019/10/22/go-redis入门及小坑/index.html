@@ -353,16 +353,27 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h6 id="创建redis-client-对象"><a href="#创建redis-client-对象" class="headerlink" title="创建redis-client 对象"></a>创建redis-client 对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">        Addr:     &quot;localhost:6379&quot;, //地址：端口</span><br><span class="line">        Password: &quot;&quot;, //密码没有可不填</span><br><span class="line">        DB:       0, //库号</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+        <h6 id="redis命令中的setex-key-value-time-获取ttl"><a href="#redis命令中的setex-key-value-time-获取ttl" class="headerlink" title="redis命令中的setex key value time,获取ttl"></a>redis命令中的setex key value time,获取ttl</h6><ul>
+<li>成功例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">totaltime := taskTimeOut + taskTimeOutErr  //预设时间+网络误差时间，初值10</span><br><span class="line">    rds.SetNX(&quot;aatestNXTTL&quot;, &quot;xxxxx&quot;, time.Duration(totaltime*1e9))</span><br><span class="line">    ttl, _ := rds.TTL(&quot;aatestNXTTL&quot;).Result()</span><br><span class="line">    for i := 0; i &lt; 11; i++ &#123;</span><br><span class="line">        ttldecimal := ttl.Nanoseconds() / 1e9</span><br><span class="line">        go func(ttldecimal int64) &#123;</span><br><span class="line">            fmt.Println(ttldecimal)</span><br><span class="line">        &#125;(ttldecimal)</span><br><span class="line">        time.Sleep(time.Second)</span><br><span class="line">        ttl, _ = rds.TTL(&quot;aatestNXTTL&quot;).Result()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>输出成功结果：<br>10 9 8 7 6 5 4 3 2 1 0</p>
+<ul>
+<li>失败例:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rds.SetNX(&quot;aatestNXTTL&quot;, &quot;x&quot;, time.Duration(totaltime)*time.Second)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>输出失败结果：<br> 10 0 0 0 0 0 。。。。</p>
+<p><strong>**</strong> 在 <code>time.Duration(totaltime)</code>中，totaltime默认的是 ns 纳秒。若输入<code>rds.SetNX(&quot;aatestNXTTL&quot;, &quot;x&quot;, time.Duration(totaltime))</code> 如果反应快的话直接输出 <code>ttl</code>，不 <code>/1e9</code>转化成秒 ，可能会输出 10ns 。有时候反应慢了，就直接输出 0。</p>
+<h6 id="创建redis-client-对象"><a href="#创建redis-client-对象" class="headerlink" title="创建redis-client 对象"></a>创建redis-client 对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">        Addr:     &quot;localhost:6379&quot;, //地址：端口</span><br><span class="line">        Password: &quot;&quot;, //密码没有可不填</span><br><span class="line">        DB:       0, //库号</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 
 <h6 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set 成功返回 &quot;OK&quot; 失败返回 &quot;ERR syntax error&quot;</span><br><span class="line">hset 成功返回 &quot;1&quot; 失败返回 &quot;err&quot;</span><br></pre></td></tr></table></figure>
 
 <h6 id="redis简单操作"><a href="#redis简单操作" class="headerlink" title="redis简单操作"></a>redis简单操作</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hmset 可以实现 n次 hset的操作</span><br></pre></td></tr></table></figure>
 
 <h6 id="get存取值判断"><a href="#get存取值判断" class="headerlink" title="get存取值判断"></a>get存取值判断</h6><ul>
-<li>Get() 取值 判断是否为空  val == “” 用空串比较<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redis 存到期时间的值 id := &quot;4001025061&quot;</span><br><span class="line">    rc.SetNX(id, &quot;1&quot;, 10*time.Second) // key  value  timeout</span><br><span class="line">    times2, err := rc.Get(id).Result()</span><br><span class="line">    if err != nil &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line">    if times2 == &quot;&quot; &#123;</span><br><span class="line">        fmt.Println(&quot;值等于 nil&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>Get() 取值 判断是否为空  val == “” 用空串比较<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redis 存到期时间的值 id := &quot;4001025061&quot;</span><br><span class="line">    rc.SetNX(id, &quot;1&quot;, 10*time.Second) // key  value  timeout</span><br><span class="line">    times2, err := rc.Get(id).Result()</span><br><span class="line">    if err != nil &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line">    if times2 == &quot;&quot; &#123;</span><br><span class="line">        fmt.Println(&quot;值等于 nil&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       </div>
@@ -375,10 +386,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-27T18:06:37+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-12T22:04:44+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月27日</p>
+    <p>更新于 2019年11月12日</p>
   </a>
 </div>
 
@@ -551,7 +562,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建redis-client-对象"><span class="toc-text">创建redis-client 对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#redis简单操作"><span class="toc-text">redis简单操作</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#get存取值判断"><span class="toc-text">get存取值判断</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#redis命令中的setex-key-value-time-获取ttl"><span class="toc-text">redis命令中的setex key value time,获取ttl</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#创建redis-client-对象"><span class="toc-text">创建redis-client 对象</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#redis简单操作"><span class="toc-text">redis简单操作</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#get存取值判断"><span class="toc-text">get存取值判断</span></a></li></ol>
     </div>
   </section>
 
