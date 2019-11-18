@@ -353,7 +353,12 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h5 id="协程并发执行等待"><a href="#协程并发执行等待" class="headerlink" title="协程并发执行等待"></a>协程并发执行等待</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var wg sync.WaitGroup</span><br><span class="line">for i:=0:i&lt;=10;i++ &#123;</span><br><span class="line">        wg.Add(1)</span><br><span class="line">        go func() &#123;</span><br><span class="line">            defer wg.Done()</span><br><span class="line"> //。。。此处执行任务代码</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">wg.Wait()</span><br></pre></td></tr></table></figure>
+        <h5 id="对切片进行遍历赋值"><a href="#对切片进行遍历赋值" class="headerlink" title="对切片进行遍历赋值"></a>对切片进行遍历赋值</h5><ul>
+<li>如果不是append直接追加赋值，用索引下标方式赋值一定要先初始化分配空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> a := []int&#123;1,2,3&#125;</span><br><span class="line">var b []struc = make([]struc, len(a))</span><br><span class="line">    for k, _ := range a &#123;</span><br><span class="line">        b[k].Name = &quot;123&quot;</span><br><span class="line">        fmt.Println(b[k])</span><br><span class="line">    &#125;</span><br><span class="line">type struc struct &#123;</span><br><span class="line">    Name string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="协程并发执行等待"><a href="#协程并发执行等待" class="headerlink" title="协程并发执行等待"></a>协程并发执行等待</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var wg sync.WaitGroup</span><br><span class="line">for i:=0:i&lt;=10;i++ &#123;</span><br><span class="line">        wg.Add(1)</span><br><span class="line">        go func() &#123;</span><br><span class="line">            defer wg.Done()</span><br><span class="line"> //。。。此处执行任务代码</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">wg.Wait()</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>wg.Wait()</code>会等待所有的协程结束，才会继续执行下去。其中 <code>wg.Add(number)</code>number可以为2，3等等其他值。取决于下面的协程数量，但是每<code>Add()</code>开启一个协程，必须对应一个 <code>Done()</code>关闭。</li>
@@ -403,10 +408,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-12T22:09:15+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-18T23:15:11+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月12日</p>
+    <p>更新于 2019年11月18日</p>
   </a>
 </div>
 
@@ -560,7 +565,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#协程并发执行等待"><span class="toc-text">协程并发执行等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当天0点的时间戳"><span class="toc-text">当天0点的时间戳</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#json操作"><span class="toc-text">json操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#对切片进行遍历赋值"><span class="toc-text">对切片进行遍历赋值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程并发执行等待"><span class="toc-text">协程并发执行等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当天0点的时间戳"><span class="toc-text">当天0点的时间戳</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#json操作"><span class="toc-text">json操作</span></a></li></ol>
     </div>
   </section>
 
