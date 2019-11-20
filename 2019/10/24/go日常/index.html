@@ -353,7 +353,10 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h5 id="对切片进行遍历赋值"><a href="#对切片进行遍历赋值" class="headerlink" title="对切片进行遍历赋值"></a>对切片进行遍历赋值</h5><ul>
+        <p>golang日常遇到的一些坑或者小技能实录</p>
+<a id="more"></a>
+
+<h5 id="对切片进行遍历赋值"><a href="#对切片进行遍历赋值" class="headerlink" title="对切片进行遍历赋值"></a>对切片进行遍历赋值</h5><ul>
 <li>如果不是append直接追加赋值，用索引下标方式赋值一定要先初始化分配空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> a := []int&#123;1,2,3&#125;</span><br><span class="line">var b []struc = make([]struc, len(a))</span><br><span class="line">    for k, _ := range a &#123;</span><br><span class="line">        b[k].Name = &quot;123&quot;</span><br><span class="line">        fmt.Println(b[k])</span><br><span class="line">    &#125;</span><br><span class="line">type struc struct &#123;</span><br><span class="line">    Name string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
@@ -408,10 +411,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-18T23:15:11+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-20T20:20:19+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月18日</p>
+    <p>更新于 2019年11月20日</p>
   </a>
 </div>
 
@@ -437,6 +440,25 @@
       
       
           <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2019/11/20/go协程并发处理/" rel="prev" title="go协程channel通信">
+                                
+                                    go协程channel通信
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/go/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> go</a> <a class="tag" href="/tags/channel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> channel</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
               
               
                   <section class="next">
@@ -684,7 +706,7 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(4)</div></a></li>
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(5)</div></a></li>
         
           <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
         
@@ -738,7 +760,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
+      <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
     </div>
   </section>
 
