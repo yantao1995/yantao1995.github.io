@@ -356,6 +356,12 @@
         <p>golang日常遇到的一些坑或者小技能实录</p>
 <a id="more"></a>
 
+<h5 id="golang知识体系"><a href="#golang知识体系" class="headerlink" title="golang知识体系"></a>golang知识体系</h5><ul>
+<li><a href="https://raw.githubusercontent.com/gocn/knowledge/master/Go知识图谱.png" target="_blank" rel="noopener">点击查看这张图</a></li>
+</ul>
+<h5 id="内建函数new与make"><a href="#内建函数new与make" class="headerlink" title="内建函数new与make"></a>内建函数new与make</h5><ul>
+<li>二者都是用于内存的分配（堆上），但是make只用于slice、map以及channel的初始化（非零值）；而new用于类型的内存分配，并且内存置为零。make返回的还是这三个引用类型本身；而new返回的是指向类型的指针。在使用slice、map以及channel的时候，还是要使用make进行初始化，然后才才可以对他们进行操作。</li>
+</ul>
 <h5 id="对切片进行遍历赋值"><a href="#对切片进行遍历赋值" class="headerlink" title="对切片进行遍历赋值"></a>对切片进行遍历赋值</h5><ul>
 <li>如果不是append直接追加赋值，用索引下标方式赋值一定要先初始化分配空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> a := []int&#123;1,2,3&#125;</span><br><span class="line">var b []struc = make([]struc, len(a))</span><br><span class="line">    for k, _ := range a &#123;</span><br><span class="line">        b[k].Name = &quot;123&quot;</span><br><span class="line">        fmt.Println(b[k])</span><br><span class="line">    &#125;</span><br><span class="line">type struc struct &#123;</span><br><span class="line">    Name string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -411,10 +417,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-20T20:20:19+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-26T20:10:07+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月20日</p>
+    <p>更新于 2019年11月26日</p>
   </a>
 </div>
 
@@ -423,7 +429,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/go/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>go</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/go/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>go</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/go日常/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>go日常</p></a></div>
 
 
         
@@ -587,7 +593,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#对切片进行遍历赋值"><span class="toc-text">对切片进行遍历赋值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程并发执行等待"><span class="toc-text">协程并发执行等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当天0点的时间戳"><span class="toc-text">当天0点的时间戳</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#json操作"><span class="toc-text">json操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#golang知识体系"><span class="toc-text">golang知识体系</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内建函数new与make"><span class="toc-text">内建函数new与make</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对切片进行遍历赋值"><span class="toc-text">对切片进行遍历赋值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程并发执行等待"><span class="toc-text">协程并发执行等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当天0点的时间戳"><span class="toc-text">当天0点的时间戳</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#json操作"><span class="toc-text">json操作</span></a></li></ol>
     </div>
   </section>
 
@@ -706,7 +712,7 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(6)</div></a></li>
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(7)</div></a></li>
         
           <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
         
@@ -760,7 +766,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
+      <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 14px; color: #999">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go日常/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
     </div>
   </section>
 
