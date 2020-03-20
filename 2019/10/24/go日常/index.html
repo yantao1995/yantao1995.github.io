@@ -356,6 +356,15 @@
         <p>golang日常遇到的一些坑或者小技能实录</p>
 <a id="more"></a>
 
+<h5 id="defer链式函数的传递调用"><a href="#defer链式函数的传递调用" class="headerlink" title="defer链式函数的传递调用"></a>defer链式函数的传递调用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">type Slice []int</span><br><span class="line">func NewSlice() Slice &#123;</span><br><span class="line">	return make(Slice, 0)</span><br><span class="line">&#125;</span><br><span class="line">func (s *Slice) Add(elem int) *Slice &#123;</span><br><span class="line">	*s = append(*s, elem)</span><br><span class="line">	fmt.Print(elem)</span><br><span class="line">	return s</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	s := NewSlice()</span><br><span class="line">	defer s.Add(1).Add(2).Add(4)</span><br><span class="line">	s.Add(3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输出 1234</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>本以为输出3124，或者3421。结果输出1234。</li>
+<li>原因：defer只能执行一个函数。</li>
+<li>在defer后是一个链式函数而且defer是一个压栈的输入，4被defer执行，1和2直接被执行，所以打印1234。</li>
+</ul>
 <h5 id="golang知识体系"><a href="#golang知识体系" class="headerlink" title="golang知识体系"></a>golang知识体系</h5><ul>
 <li><a href="https://raw.githubusercontent.com/gocn/knowledge/master/Go知识图谱.png" target="_blank" rel="noopener">点击查看这张图</a></li>
 </ul>
@@ -417,10 +426,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-26T20:10:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-20T17:13:57+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月26日</p>
+    <p>更新于 2020年3月20日</p>
   </a>
 </div>
 
@@ -593,7 +602,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#golang知识体系"><span class="toc-text">golang知识体系</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内建函数new与make"><span class="toc-text">内建函数new与make</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对切片进行遍历赋值"><span class="toc-text">对切片进行遍历赋值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程并发执行等待"><span class="toc-text">协程并发执行等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当天0点的时间戳"><span class="toc-text">当天0点的时间戳</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#json操作"><span class="toc-text">json操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#defer链式函数的传递调用"><span class="toc-text">defer链式函数的传递调用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#golang知识体系"><span class="toc-text">golang知识体系</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内建函数new与make"><span class="toc-text">内建函数new与make</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对切片进行遍历赋值"><span class="toc-text">对切片进行遍历赋值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程并发执行等待"><span class="toc-text">协程并发执行等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当天0点的时间戳"><span class="toc-text">当天0点的时间戳</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用类型转换"><span class="toc-text">常用类型转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切片元素删除"><span class="toc-text">切片元素删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串比较"><span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内层结构体嵌套"><span class="toc-text">内层结构体嵌套</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#windows下使用阿里云代理包下载"><span class="toc-text">windows下使用阿里云代理包下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inf-阶码溢出"><span class="toc-text">Inf 阶码溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nohup文件过大"><span class="toc-text">nohup文件过大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#json操作"><span class="toc-text">json操作</span></a></li></ol>
     </div>
   </section>
 
