@@ -96,4 +96,4 @@ backup:
     theme: hexo-theme-material-x
     message: Backup blog
     repository:
-       origin/source: git@github.com:yantao1995/yantao1995.github.io.git,source
+       origin: git@github.com:yantao1995/yantao1995.github.io.git,source
