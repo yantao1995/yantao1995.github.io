@@ -92,9 +92,9 @@ deploy:
 
 ## backup
 backup:
-  type: git
-  theme: hexo-theme-material-x
-  message: Back up blog
-  repository:
-   github: git@github.com:yantao1995/yantao1995.github.io.git,source
-   gitee: git@gitee.com:tany_world/blog.git,source
+    type: git
+    theme: hexo-theme-material-x
+    message: Backup blog
+    repository:
+       origin: git@github.com:yantao1995/yantao1995.github.io.git,source
+       gitee: git@gitee.com:tany_world/blog.git,source
