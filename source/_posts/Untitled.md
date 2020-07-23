@@ -1,7 +1,8 @@
-title: redis简单动态字符串 sds
+title: redis底层实现之简单动态字符串 sds
 author: Tany
 tags:
   - redis
+  - sds
 categories:
   - redis
 date: 2020-07-23 10:26:00
