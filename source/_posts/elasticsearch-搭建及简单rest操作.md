@@ -2,9 +2,13 @@ title: elasticsearch 搭建及简单rest操作
 author: Tany
 tags:
   - es
-categories: []
+categories:
+  - es
 date: 2022-01-19 18:54:00
 ---
+学习 elasticsearch 的简单笔记，记不住了就来看看。
+
+<!-- more -->
 
 ## ES部署 
 
