@@ -5,7 +5,7 @@ tags:
   - sds
 categories:
   - redis
-date: 2020-07-23 10:26:00
+date: 2020-08-23 10:26:00
 ---
 阅读redis书籍《redis设计与实现》笔记。
 源码版本redis 3.0。

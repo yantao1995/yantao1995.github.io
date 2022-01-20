@@ -2,6 +2,7 @@ title: elasticsearch 搭建及简单rest操作
 author: Tany
 tags:
   - es
+  - 笔记
 categories:
   - es
 date: 2022-01-19 18:54:00
@@ -11,6 +12,17 @@ date: 2022-01-19 18:54:00
 <!-- more -->
 
 ## ES部署 
+
+- host文件ip地址映射
+
+```
+vim /etc/hosts
+
+192.168.25.129 node1
+192.168.25.130 node2
+192.168.25.131 node3
+```
+
 
 ### 单机部署
 - 不能使用root账户，新建账户，赋予权限运行
