@@ -87,7 +87,7 @@ search:
 deploy:
     type: git
     message: update
-    repo: https://github.com/yantao1995/yantao1995.github.io
+    repo: git@github.com:yantao1995/yantao1995.github.io.git
     branch: master
 
 ## backup
