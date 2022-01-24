@@ -7,38 +7,31 @@ date: 2019-11-20 21:25:18
  - 严涛/男/1995.09.29
  - 本科/软件工程/攀枝花学院 (2015.9-2019.6)
  - Github：https://github.com/yantao1995
- - Email：codemain@vip.qq.com 
+ - Email：1173904005@qq.com 
 
 ---
 #  工作经历
+
+### 成都网信天成科技有限公司
+
+` 区块链交易所 `
+-  work：后台，合约交易，监控，运营工具。
+
+
 ### [成都精灵云科技有限公司]( https://www.ghostcloud.cn)（实习）2018.12-2019.3
 
 #### 镜像仓库管理
 
 ` 学习了云计算相关的知识。然后在镜像仓库管理的负责人指导下，做相关的开发工作。 `
 -  work：镜像打包，镜像漏洞扫描。
--  使用平台：gira，jenkins，gitlab
-
-### [成都乐享信息科技科技有限公司](http://lexiangtech.shop) 2019.10—2020.1
-
-#### 商城砍价后端开发及订单xlsx报表系统
-- 工作：商城全民砍价玩法，策划方案及代码实施。
-- 玩法：所有用户对商城抽取的商品进行砍价，最后由所有用户来抢购
-
-#### 代理商购物相关及三级分佣结算系统
-- 工作：代理商详情页展示，代理商品详情展示，代理人邀请，团队管理，三级分佣及结算。
-- 玩法：代理商对商品承包一定数量，然后推广销售自己承包的商品赚取佣金。
-
-#### 原商场功能的改动和新增功能
-- 比如商城入账对接支付宝打款，代金券入账抵扣限制，商城动态通知，广告改动，定位城市及注册获取系统邀请码，乐豆市场等。
-  
+ 
   --- 
   
 ## 生存技能
 - 语言：Golang ，Java，C，C++，C#
-- Web框架：Gin，Gorm，Beego，SpringBoot，Mybatis
+- 语言生态：Gin，Iris , Xorm , Gorm，Beego，SpringBoot，Mybatis
 - 前端：Bootstrap，JQuery，ajax，js，css，html
-- 数据库相关：MySQL， redis，SQL Server 
+- 数据库相关：MySQL，redis，SQL Server, MongoDB
 - 其他：Git，linux
 - 云计算相关 ： Docker ， k8s  摸索中...
 - 技能摸索中，任重而道远...
