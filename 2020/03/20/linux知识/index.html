@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>linux学习 | Record life</title>
+  <title>linux学习-基本 | Record life</title>
   
   
 
@@ -270,7 +270,7 @@
   
     <h1 class="title">
       <a href="/2020/03/20/linux知识/">
-        linux学习
+        linux学习-基本
       </a>
     </h1>
   
@@ -353,10 +353,30 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>记录linux学习。</p>
+        <p>linux 学习</p>
 <a id="more"></a>
 
-<h6 id="开头的一些常用特殊指令"><a href="#开头的一些常用特殊指令" class="headerlink" title="$开头的一些常用特殊指令"></a>$开头的一些常用特殊指令</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$#：传入的参数数量</span><br><span class="line">$@：传入的参数列表</span><br><span class="line">$0,$1,...：传入的第 i 个参数</span><br><span class="line">!$ 或者 $_：上一个命令的最后一个参数</span><br><span class="line">$?：上一条命令返回的状态码</span><br><span class="line">$!：Shell 最后运行的后台 Process 的 PID</span><br></pre></td></tr></table></figure>
+<h2 id="开头的一些常用特殊指令"><a href="#开头的一些常用特殊指令" class="headerlink" title="$开头的一些常用特殊指令"></a>$开头的一些常用特殊指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$#：传入的参数数量</span><br><span class="line">$@：传入的参数列表</span><br><span class="line">$0,$1,...：传入的第 i 个参数</span><br><span class="line">!$ 或者 $_：上一个命令的最后一个参数</span><br><span class="line">$?：上一条命令返回的状态码</span><br><span class="line">$!：Shell 最后运行的后台 Process 的 PID</span><br></pre></td></tr></table></figure>
+
+<h2 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h2><h4 id="rpm-红帽软件包管理工具，类似于windows的setup-exe"><a href="#rpm-红帽软件包管理工具，类似于windows的setup-exe" class="headerlink" title="rpm 红帽软件包管理工具，类似于windows的setup.exe"></a>rpm 红帽软件包管理工具，类似于windows的setup.exe</h4><p>缺点就是各种依赖关系不好处理，a依赖b，b依赖c这种</p>
+<ul>
+<li>操作<code>rpm [-qa 查询安装的所有软件包，-e卸载，-i 安装(-v 显示详细信息，-h显示进度条) --nodeps 不检查依赖强制操作 ]</code></li>
+</ul>
+<h4 id="yum-基于rpm管理，更好用，一键操作"><a href="#yum-基于rpm管理，更好用，一键操作" class="headerlink" title="yum 基于rpm管理，更好用，一键操作"></a>yum 基于rpm管理，更好用，一键操作</h4><p> 自动处理依赖关系</p>
+<ul>
+<li>操作  yum [-y所有都yes，install 安装，update 更新，check-update 检测是否更新，remove删除，list显示信息，clean清理过期缓存，deplist显示所有依赖]</li>
+<li>修改yun网络源 文件<code>/etc/yum.repos.d 目录下  CentOs-Base.repo文件</code></li>
+</ul>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><h3 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h3><p>.target 一组服务的集合<br>.service 单个服务</p>
+<h5 id="centos6"><a href="#centos6" class="headerlink" title="centos6"></a>centos6</h5><p>service  服务名  [restart | stop | start | status]<br>所在目录  /etc/init.d/</p>
+<h5 id="centos7-也兼容-centos6-的方式"><a href="#centos7-也兼容-centos6-的方式" class="headerlink" title="centos7 (也兼容 centos6 的方式)"></a>centos7 (也兼容 centos6 的方式)</h5><p>systemctl  [start |stop | restart | status|disable]  服务名<br>所在目录  /usr/lib/systemd</p>
+<h3 id="启动级别"><a href="#启动级别" class="headerlink" title="启动级别"></a>启动级别</h3><ul>
+<li>3  multi-user.target   多用户控制台界面</li>
+<li>5  graphical.target  多用户图形界面</li>
+</ul>
+<p>查看默认运行级别  <code>systemctl  get-default</code><br>设置默认运行级别  <code>systemctl  set-default 运行级别</code></p>
+<p>切换运行级别  <code>init 3/5</code></p>
+
       </div>
       
         <br>
@@ -367,10 +387,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-23T10:24:52+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-29T16:35:35+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年7月23日</p>
+    <p>更新于 2022年5月29日</p>
   </a>
 </div>
 
@@ -401,16 +421,16 @@
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/2020/08/23/Untitled/" rel="prev" title="redis底层实现之简单动态字符串 sds">
+                              <a href="/2020/03/21/linux学习-网络/" rel="prev" title="linux学习-网络">
                                 
-                                    redis底层实现之简单动态字符串 sds
+                                    linux学习-网络
                                 
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/redis/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> redis</a> <a class="tag" href="/tags/sds/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> sds</a>
+                                  <a class="tag" href="/tags/linux/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> linux</a>
                               </h6>
                           
                       </span>
@@ -460,7 +480,7 @@
 
   <script>
     window.subData = {
-      title: 'linux学习',
+      title: 'linux学习-基本',
       tools: true
     }
   </script>
@@ -543,7 +563,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#开头的一些常用特殊指令"><span class="toc-text">$开头的一些常用特殊指令</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开头的一些常用特殊指令"><span class="toc-text">$开头的一些常用特殊指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件包管理"><span class="toc-text">软件包管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#rpm-红帽软件包管理工具，类似于windows的setup-exe"><span class="toc-text">rpm 红帽软件包管理工具，类似于windows的setup.exe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#yum-基于rpm管理，更好用，一键操作"><span class="toc-text">yum 基于rpm管理，更好用，一键操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用"><span class="toc-text">常用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务管理"><span class="toc-text">服务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#centos6"><span class="toc-text">centos6</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#centos7-也兼容-centos6-的方式"><span class="toc-text">centos7 (也兼容 centos6 的方式)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动级别"><span class="toc-text">启动级别</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -672,7 +692,7 @@
         
           <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class='name'>kafka</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(5)</div></a></li>
         
           <li><a class="flat-box" title="/categories/mongo/" href="/categories/mongo/"><div class='name'>mongo</div><div class='badge'>(2)</div></a></li>
         
@@ -726,7 +746,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/algor/" style="font-size: 14px; color: #999">algor</a> <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/es/" style="font-size: 14px; color: #999">es</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 17.33px; color: #828282">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go日常/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/hash/" style="font-size: 14px; color: #999">hash</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/list/" style="font-size: 14px; color: #999">list</a> <a href="/tags/mongo/" style="font-size: 17.33px; color: #828282">mongo</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 20.67px; color: #6c6c6c">redis</a> <a href="/tags/sds/" style="font-size: 14px; color: #999">sds</a> <a href="/tags/set/" style="font-size: 14px; color: #999">set</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #999">zookeeper</a> <a href="/tags/zset/" style="font-size: 14px; color: #999">zset</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/笔记/" style="font-size: 14px; color: #999">笔记</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
+      <a href="/tags/algor/" style="font-size: 14px; color: #999">algor</a> <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/es/" style="font-size: 14px; color: #999">es</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 16.5px; color: #888">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go日常/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/hash/" style="font-size: 14px; color: #999">hash</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/linux/" style="font-size: 19px; color: #777">linux</a> <a href="/tags/list/" style="font-size: 14px; color: #999">list</a> <a href="/tags/mongo/" style="font-size: 16.5px; color: #888">mongo</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 21.5px; color: #666">redis</a> <a href="/tags/sds/" style="font-size: 14px; color: #999">sds</a> <a href="/tags/set/" style="font-size: 14px; color: #999">set</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #999">zookeeper</a> <a href="/tags/zset/" style="font-size: 14px; color: #999">zset</a> <a href="/tags/切片/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/并发/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/笔记/" style="font-size: 14px; color: #999">笔记</a> <a href="/tags/镜像扫描/" style="font-size: 14px; color: #999">镜像扫描</a>
     </div>
   </section>
 
