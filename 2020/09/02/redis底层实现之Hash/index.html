@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>redis底层实现之Hash | Record life</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>Record life</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+            
+            id="archives">
+            <i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-link fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Record life
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;文章
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;文章分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2020/09/02/redis%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%B9%8BHash/">
+        redis底层实现之Hash
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="/" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p></p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-09-02</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/redis/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>redis</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>阅读redis书籍《redis设计与实现》笔记。<br>源码版本redis 3.0。</p>
+<span id="more"></span>
+
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h3><ul>
+<li>源码3.0       dict.h</li>
+</ul>
+<h4 id="哈希表与哈希表节点"><a href="#哈希表与哈希表节点" class="headerlink" title="哈希表与哈希表节点"></a>哈希表与哈希表节点</h4><ul>
+<li>定义：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 哈希表</span><br><span class="line"> *</span><br><span class="line"> * 每个字典都使用两个哈希表，从而实现渐进式 rehash 。</span><br><span class="line"> */</span><br><span class="line">typedef struct dictht &#123;</span><br><span class="line">    </span><br><span class="line">    // 哈希表数组</span><br><span class="line">    dictEntry **table;</span><br><span class="line"></span><br><span class="line">    // 哈希表大小</span><br><span class="line">    unsigned long size;</span><br><span class="line">    </span><br><span class="line">    // 哈希表大小掩码，用于计算索引值</span><br><span class="line">    // 总是等于 size - 1</span><br><span class="line">    unsigned long sizemask;</span><br><span class="line"></span><br><span class="line">    // 该哈希表已有节点的数量</span><br><span class="line">    unsigned long used;</span><br><span class="line"></span><br><span class="line">&#125; dictht;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 哈希表节点</span><br><span class="line"> */</span><br><span class="line">typedef struct dictEntry &#123;</span><br><span class="line">    </span><br><span class="line">    // 键</span><br><span class="line">    void *key;</span><br><span class="line"></span><br><span class="line">    // 值</span><br><span class="line">    union &#123;</span><br><span class="line">        void *val;</span><br><span class="line">        uint64_t u64;</span><br><span class="line">        int64_t s64;</span><br><span class="line">    &#125; v;</span><br><span class="line"></span><br><span class="line">    // 指向下个哈希表节点，形成链表</span><br><span class="line">    struct dictEntry *next;</span><br><span class="line"></span><br><span class="line">&#125; dictEntry;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>union简单理解:共用体,共用一个内存首地址，并且各种变量名都可以同时使用，操作也是共同生效。如此多的access内存手段，确实好用，不过这些“手段”之间却没法互相屏蔽——就好像数组+下标和指针+偏移一样。 （极致的内存压榨）</p>
+</li>
+<li><p>table:数组中每个元素都是指向dictEntry节点的指针。</p>
+</li>
+<li><p>dictEntry 保存键值对，v使用union，可以是指针，也可以是uint64_t或者int64_t。（类型_t 是因为是 typedef 定义的，而不是新类型，原因是因为跨平台）</p>
+</li>
+</ul>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ul>
+<li>dict定义：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 字典</span><br><span class="line"> */</span><br><span class="line">typedef struct dict &#123;</span><br><span class="line"></span><br><span class="line">    // 类型特定函数</span><br><span class="line">    dictType *type;</span><br><span class="line"></span><br><span class="line">    // 私有数据</span><br><span class="line">    void *privdata;</span><br><span class="line"></span><br><span class="line">    // 哈希表</span><br><span class="line">    dictht ht[2];</span><br><span class="line"></span><br><span class="line">    // rehash 索引</span><br><span class="line">    // 当 rehash 不在进行时，值为 -1</span><br><span class="line">    int rehashidx; /* rehashing not in progress if rehashidx == -1 */</span><br><span class="line"></span><br><span class="line">    // 目前正在运行的安全迭代器的数量</span><br><span class="line">    int iterators; /* number of iterators currently running */</span><br><span class="line"></span><br><span class="line">&#125; dict;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>type 和 privdata 指针类型，为了创建多态字典。</li>
+<li>type 保存用于操作特定类型键值对的函数。</li>
+<li>privdata 保存了需要穿给那些类型特定函数的可选参数。</li>
+</ul>
+<hr>
+<ul>
+<li>dictType定义:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 字典类型特定函数</span><br><span class="line"> */</span><br><span class="line">typedef struct dictType &#123;</span><br><span class="line"></span><br><span class="line">    // 计算哈希值的函数</span><br><span class="line">    unsigned int (*hashFunction)(const void *key);</span><br><span class="line"></span><br><span class="line">    // 复制键的函数</span><br><span class="line">    void *(*keyDup)(void *privdata, const void *key);</span><br><span class="line"></span><br><span class="line">    // 复制值的函数</span><br><span class="line">    void *(*valDup)(void *privdata, const void *obj);</span><br><span class="line"></span><br><span class="line">    // 对比键的函数</span><br><span class="line">    int (*keyCompare)(void *privdata, const void *key1, const void *key2);</span><br><span class="line"></span><br><span class="line">    // 销毁键的函数</span><br><span class="line">    void (*keyDestructor)(void *privdata, void *key);</span><br><span class="line">    </span><br><span class="line">    // 销毁值的函数</span><br><span class="line">    void (*valDestructor)(void *privdata, void *obj);</span><br><span class="line"></span><br><span class="line">&#125; dictType;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一般状态下的结构：</li>
+</ul>
+<ol>
+<li>dict 的 ht 指向 2个 dictht，</li>
+<li>dictht的table指向 dictEntry*[]</li>
+<li>dictEntry*[] 存储 dictEndty的键值对key,value节点。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dict.ht  -&gt; dictht[]</span><br><span class="line">dictht.table -&gt; dictEntry*[]</span><br><span class="line">dictEntry&#123;key,value&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://redisbook.com/_images/graphviz-93608325578e8e45848938ef420115bf2227639e.png" alt="字典结构图"></p>
+<h4 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h4><ul>
+<li>链地址法：<ol>
+<li>每个哈希表节点都有一个next指针，多个哈希表节点可以用next指针构成一个单向链表，被分配到同一个索引上的多个节点可以用这个单向链表连接起来，解决了键冲突的问题。</li>
+<li>新节点添加在链表表头位置。（为了速度）</li>
+</ol>
+</li>
+</ul>
+<h4 id="rehash条件：扩容和收缩-依赖负载因子"><a href="#rehash条件：扩容和收缩-依赖负载因子" class="headerlink" title="rehash条件：扩容和收缩(依赖负载因子)"></a>rehash条件：扩容和收缩(依赖负载因子)</h4><ul>
+<li>哈希表负载因子计算公式：</li>
+</ul>
+<p><code>load_factory = ht[0].used / ht[0].size (负载因子 = 哈希表已保存节点数量 / 哈希表大小)</code></p>
+<ul>
+<li><p>扩容</p>
+<ol>
+<li><p>程序没有执行BGSAVE命令或者BGREWRITEAOF(AOF重写)命令，并且哈希表的负载因子大于等于1</p>
+</li>
+<li><p>如果程序正在执行BGSAVE或者BGREWRITEAOF(AOF重写)命令并且哈希表的负载因子大于等于5。在执行RDB或者AOF重写操作时，redis会创建当前服务器的子进程执行相应操作，为了避免在子进程存在期间对哈希表进行扩展操作，将扩展因子提高。可以避RDB或者AOF重写时不必要的内存写入操作，最大限度的节约内存。</p>
+</li>
+</ol>
+</li>
+<li><p>收缩：负载因子小于0.1进行收缩</p>
+</li>
+</ul>
+<h4 id="渐进式rehash"><a href="#渐进式rehash" class="headerlink" title="渐进式rehash"></a>渐进式rehash</h4><ul>
+<li><p>概念：扩展或收缩哈希表时 ht[0] 的键值对 rehash到  ht[1] 不是一次完成，而是分多次，渐进式的。</p>
+</li>
+<li><p>原因：键值对数据量庞大时，一次性rehash的计算量可能会导致服务器在一段时间内停止服务。</p>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>为 ht[1] 分配空间， 让字典同时持有 ht[0] 和 ht[1] 两个哈希表。</li>
+<li>在字典中维持一个索引计数器变量 rehashidx ， 并将它的值设置为 0 ， 表示 rehash 工作正式开始。</li>
+<li>在 rehash 进行期间， 每次对字典执行添加、删除、查找或者更新操作时， 程序除了执行指定的操作以外， 还会顺带将 ht[0] 哈希表在 rehashidx 索引上的所有键值对 rehash 到 ht[1] ， 当 rehash 工作完成之后， 程序将 rehashidx 属性的值增一。</li>
+<li>随着字典操作的不断执行， 最终在某个时间点上， ht[0] 的所有键值对都会被 rehash 至 ht[1] ， 这时程序将 rehashidx 属性的值设为 -1 ， 表示 rehash 操作已完成。</li>
+</ol>
+</li>
+<li><p>过程中：</p>
+<ol>
+<li>删除，查找，更新会同时在两个哈希表上进行。查找顺序：ht[0] -&gt; ht[1] 。</li>
+<li>添加会在ht[1]上进行。保证了ht[0]只减不增，随着rehash操作最终变成空表。</li>
+</ol>
+</li>
+</ul>
+
+      </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-01-20T17:34:44+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2022年1月20日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/redis/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>redis</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hash/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>hash</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2020/09/15/redis%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%B9%8B%E6%95%B4%E6%95%B0%E9%9B%86%E5%90%88/" rel="prev" title="redis底层实现之整数集合">
+                                
+                                    redis底层实现之整数集合
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/redis/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> redis</a> <a class="tag" href="/tags/set/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> set</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/08/24/redis%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%B9%8BList/" rel="prev" title="redis底层实现之List">
+                                  
+                                      redis底层实现之List
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/redis/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> redis</a> <a class="tag" href="/tags/list/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> list</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'redis底层实现之Hash',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://avatars0.githubusercontent.com/u/40712505?s=460&v=4'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:1173904005@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/yantao1995"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8%E8%8A%82%E7%82%B9"><span class="toc-text">哈希表与哈希表节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="toc-text">解决冲突</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rehash%E6%9D%A1%E4%BB%B6%EF%BC%9A%E6%89%A9%E5%AE%B9%E5%92%8C%E6%94%B6%E7%BC%A9-%E4%BE%9D%E8%B5%96%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90"><span class="toc-text">rehash条件：扩容和收缩(依赖负载因子)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8Frehash"><span class="toc-text">渐进式rehash</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于我
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/es/" href="/categories/es/"><div class='name'>es</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class='name'>kafka</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/mongo/" href="/categories/mongo/"><div class='name'>mongo</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class='name'>redis</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/zookeeper/" href="/categories/zookeeper/"><div class='name'>zookeeper</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/algor/" style="font-size: 14px; color: #999">algor</a> <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/es/" style="font-size: 14px; color: #999">es</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 16.5px; color: #888">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go%E6%97%A5%E5%B8%B8/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/hash/" style="font-size: 14px; color: #999">hash</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/linux/" style="font-size: 19px; color: #777">linux</a> <a href="/tags/list/" style="font-size: 14px; color: #999">list</a> <a href="/tags/mongo/" style="font-size: 16.5px; color: #888">mongo</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 21.5px; color: #666">redis</a> <a href="/tags/sds/" style="font-size: 14px; color: #999">sds</a> <a href="/tags/set/" style="font-size: 14px; color: #999">set</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #999">zookeeper</a> <a href="/tags/zset/" style="font-size: 14px; color: #999">zset</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 14px; color: #999">笔记</a> <a href="/tags/%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/" style="font-size: 14px; color: #999">镜像扫描</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p>扬帆起航的小白一枚</p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:1173904005@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/yantao1995"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

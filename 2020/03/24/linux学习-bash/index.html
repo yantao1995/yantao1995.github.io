@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>linux学习-bash | Record life</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>Record life</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+            
+            id="archives">
+            <i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-link fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Record life
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;文章
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;文章分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2020/03/24/linux%E5%AD%A6%E4%B9%A0-bash/">
+        linux学习-bash
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="/" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p></p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-03-24</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>linux 学习</p>
+<span id="more"></span>
+
+
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="在线帮助文档"><a href="#在线帮助文档" class="headerlink" title="在线帮助文档"></a>在线帮助文档</h3><h4 id="man"><a href="#man" class="headerlink" title="man"></a>man</h4><p> <code>man  [命令的名称]</code><br>type [命令] 判断命令类型 ,内部命令需要 <code>man -f [内部命令]</code></p>
+<ul>
+<li>内部命令 cd ,exit</li>
+<li>外部命令 ps,ls …..</li>
+</ul>
+<h4 id="help"><a href="#help" class="headerlink" title="help"></a>help</h4><p>help [内部命令]<br>只能查看内部命令</p>
+<h4 id="–help"><a href="#–help" class="headerlink" title="–help"></a>–help</h4><p>[外部命令] –help<br>只能查看外部命令</p>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><h3 id="普通"><a href="#普通" class="headerlink" title="普通"></a>普通</h3><p><code>pwd,ls,cd,mkdir,rmdir,touch,cp,rm,mv,catmore,less,echo,alias,head,tail,history,date,sort</code></p>
+<ul>
+<li>输入重定向和追加:  <code>&gt;</code> 覆盖  , <code>&gt;&gt;</code> 追加</li>
+<li>ln : 仅删除软连接 <code>rm [名] </code>   , 删除连接文件夹内文件 <code>rm  [名]/  ， [-s 不加就是创建硬链接，底层会复制一份inode信息]</code><h3 id="常用易忘命令参数"><a href="#常用易忘命令参数" class="headerlink" title="常用易忘命令参数"></a>常用易忘命令参数</h3><h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-k [n]  //按第n列升序</span><br><span class="line">-r  //降序</span><br><span class="line">-n //按数值大小排序</span><br><span class="line">-t [分隔字符]  //指定分隔字符</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h3><h4 id="账户"><a href="#账户" class="headerlink" title="账户"></a>账户</h4><h5 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h5><p>创建用户 <code>useradd [-g [组名]] [用户名]</code><br>更改密码 <code>passwd [用户名]</code><br>查看用户是否存在  <code>id [用户名]</code><br>切换用户 <code>su [用户名]</code><br>当前用户  最原始的会话 <code>who am i</code> , 目前的会话 <code>whoami</code><br>赋予root权限执行命令  <code>sudo  [命令]</code></p>
+<ul>
+<li>需要先将用户权限添加至 <code>/etc/sudoers</code></li>
+<li>用户权限  <code>用户名  	ALL=(ALL)   ALL</code></li>
+<li>组权限  <code>%组名   ALL=(ALL)   ALL   [NOPASSWD:all  （可选项，用于跳过输密码） ]</code></li>
+</ul>
+<h5 id="组-：-集中化管理用户"><a href="#组-：-集中化管理用户" class="headerlink" title="组 ： 集中化管理用户"></a>组 ： 集中化管理用户</h5><p>用户删除  <code>userdel  [-r:是否删个人目录] [用户名]</code><br>用户组  配置文件 <code>/etc/group</code><br>新建组 <code>groupadd [名]</code><br>修改用户所在组 <code>usermod -g  [组名]  [用户名]</code><br>修改组的组名 <code>groupmod  -n [新组名]  [旧组名]</code><br>删除组 <code>groupdel [名]</code></p>
+<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><ul>
+<li><p>chmod 修改文件<br>查看  <code>ll  或者  ls -l        - 普通文件 d 文件夹  l 链接文件</code><br>读写运行  <code> rwx</code> ,   所属用户 | 组用户  | 其他用户</p>
+<ul>
+<li>删除文件，需要对文件父目录有w写权限</li>
+<li>进入目录，需要有对该文件的x运行权限</li>
+<li>修改权限 <code>chmod [-R (针对目录下的所有文件)] [ugoa (用户/组/其他用户/全部)]  [+-=]  [rwx]  文件/目录</code></li>
+</ul>
+</li>
+<li><p>chown 改变所有者 <code>chown [-R (针对目录向下递归)]  [目标用户]  [文件/目录]</code></p>
+</li>
+<li><p>chgrp 改变所属组  <code>chgrp [目标组] [文件/目录]</code></p>
+</li>
+</ul>
+<h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><ul>
+<li>find 找文件&#x2F;目录  <code> find  [ （路径匹配）  (-name 名字) (-user 所属用户) （-size 文件大小 [ +2M（大于2M）]）] [文件名]</code></li>
+<li>locate 速度快，在文件系统数据库内找 <code>locate [名]</code>，每天更新，也可以手动更新数据库 <code>updatedb</code></li>
+<li>which 查找命令位置,  <code>which [命令]</code></li>
+<li>grep 过滤查找  <code>grep [-n 显示行号] [关键字]  [文件名]</code></li>
+<li>wc  统计词数   <code>wc [文件名]</code>  结果 <code>x1  x2  x3</code> 分别为  行数，单词数，字节数</li>
+</ul>
+<h4 id="压缩解压"><a href="#压缩解压" class="headerlink" title="压缩解压"></a>压缩解压</h4><ul>
+<li>gz压缩解压 <code>gzip/gunzip [文件名] </code> 不保留源文件，只能压缩文件，不能压缩目录</li>
+<li>z压缩解压 <code>zip [-r 压缩目录]     unzip [-d 存放目录]</code>   要保留源文件，可以压缩目录</li>
+<li>tar 打包归档  <code>tar [-c 产生.tar文件, -v 显示详细信息, -f 指定压缩后的文件名，-z 打包同时压缩(使用的gzip)，-x解包.tar文件,-C指定解压目录] </code><ul>
+<li>压缩 <code>tar -zcvf  [文件名 ]  [....文件]</code></li>
+<li>解压 <code>tar -zxvf  [文件名 ] [-C]  [指定目录]</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h4><ul>
+<li>tree 显示目录树 <code>安装yum install tree</code></li>
+<li>显示当前文件本身的大小 <code>ls -lh </code></li>
+<li>du查看当前目录占用所有的大小  <code>du [-h显示单位大小,-a不仅查看子目录，还有文件，-c结尾额外显示总和，-s只显示总和，--max-depth=n指定统计子目录深度的第n层] [目录/文件]</code></li>
+<li>df 查看磁盘剩余空间  <code>df [-h 显示单位大小]</code></li>
+<li>mount&#x2F;umount 挂载&#x2F;卸载  <code>mount  [-t 文件系统类型，-rw 读写方式，-ro只读] [设备位置]  [挂载点] </code><ul>
+<li>设置开机启动自动挂载，修改文件  <code>/etc/fstab</code>  里面新增一行挂载内容</li>
+</ul>
+</li>
+<li>fdisk分区  <code>fdisk [-l 查看分区详情，-n添加一个分区]</code></li>
+<li>lsblk 查看设备挂载情况  <code>lsblk [-f 查看设备详细情况，文件情况]</code></li>
+</ul>
+<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><ul>
+<li>free  查看内存使用情况  <code>free [-h 显示单位大小]</code></li>
+</ul>
+<h4 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h4><ul>
+<li><p>ps 查看进程 只显示当前终端用户的 <code>ps</code>  参数带 - 的表示标志unix风格，不带-的是BSD风格 一般想看资源占用率 <code>ps aux</code>  想看进程父子关系 <code>ps -ef</code></p>
+<ul>
+<li><code>ps [a带终端所有用户进程，x当前用户的所有进程，u面向用户友好的显示风格]</code> 多显示了内存和cpu使用</li>
+<li><code>ps[-e所有进程,-u某个用户关联的进程,-f完整格式的进程列表]</code> 多显示了父进程ppid</li>
+</ul>
+</li>
+<li><p>kill 终止进程   【慎用 killall 终止所有与该进程有关的进程】<code>kill  [-(1-62)信号值【一般-9 SIGKILL】，-l查看信号值列表] [进程id]</code></p>
+</li>
+<li><p>pstree 进程树  <code>ps [-p 查看pid ，-u 进程所属]</code></p>
+</li>
+<li><p>top 实时查看进程状态  <code>top [-d秒数 指定每隔几秒更新，-i不显示闲置或僵死进程，-p指定进程id来监控某个进程]</code> 功能 <code>u 筛选user，k终止进程</code></p>
+</li>
+<li><p>netstat 显示网络状态  <code>netstat [-a 显示所有list和socket，-n不显示别名能显示数字的全部显示数字，-l仅列出监听的服务状态，-p显示哪个进程在调用]</code> 常用查看进程网络信息 <code>netstat -anp</code>  常用查看网络端口 <code>netstat -nlp</code></p>
+</li>
+<li><p>crontab 系统定时任务,开启守护进程 <code>systemctl start crond</code> 命令行 <code>crontab [-e 编辑任务，-l查询任务， -r删除当前用户的所有任务]</code>  编辑 <code> * * * * * 分别表示 分钟，小时，天，月，星期几</code></p>
+</li>
+</ul>
+
+      </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-29T16:39:47+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2022年5月29日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>linux</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2020/03/26/linux%E5%AD%A6%E4%B9%A0-shell/" rel="prev" title="linux学习-shell">
+                                
+                                    linux学习-shell
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/linux/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> linux</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/03/22/linux%E5%AD%A6%E4%B9%A0-vim/" rel="prev" title="linux学习-vim">
+                                  
+                                      linux学习-vim
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/linux/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> linux</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'linux学习-bash',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://avatars0.githubusercontent.com/u/40712505?s=460&v=4'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:1173904005@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/yantao1995"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3"><span class="toc-text">在线帮助文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#man"><span class="toc-text">man</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#help"><span class="toc-text">help</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%93help"><span class="toc-text">–help</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8"><span class="toc-text">常用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A"><span class="toc-text">普通</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%98%93%E5%BF%98%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0"><span class="toc-text">常用易忘命令参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sort"><span class="toc-text">sort</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86"><span class="toc-text">管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7"><span class="toc-text">账户</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%A8%E6%88%B7"><span class="toc-text">用户</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%84-%EF%BC%9A-%E9%9B%86%E4%B8%AD%E5%8C%96%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="toc-text">组 ： 集中化管理用户</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%83%E9%99%90"><span class="toc-text">权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2"><span class="toc-text">搜索</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩解压</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98"><span class="toc-text">磁盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98"><span class="toc-text">内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-text">系统管理</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于我
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/es/" href="/categories/es/"><div class='name'>es</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class='name'>kafka</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/mongo/" href="/categories/mongo/"><div class='name'>mongo</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class='name'>redis</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/zookeeper/" href="/categories/zookeeper/"><div class='name'>zookeeper</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/algor/" style="font-size: 14px; color: #999">algor</a> <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/es/" style="font-size: 14px; color: #999">es</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 16.5px; color: #888">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go%E6%97%A5%E5%B8%B8/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/hash/" style="font-size: 14px; color: #999">hash</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/linux/" style="font-size: 19px; color: #777">linux</a> <a href="/tags/list/" style="font-size: 14px; color: #999">list</a> <a href="/tags/mongo/" style="font-size: 16.5px; color: #888">mongo</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 21.5px; color: #666">redis</a> <a href="/tags/sds/" style="font-size: 14px; color: #999">sds</a> <a href="/tags/set/" style="font-size: 14px; color: #999">set</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #999">zookeeper</a> <a href="/tags/zset/" style="font-size: 14px; color: #999">zset</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 14px; color: #999">笔记</a> <a href="/tags/%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/" style="font-size: 14px; color: #999">镜像扫描</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p>扬帆起航的小白一枚</p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:1173904005@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/yantao1995"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

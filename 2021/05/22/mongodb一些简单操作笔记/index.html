@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>mongodb一些简单操作笔记 | Record life</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>Record life</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+            
+            id="archives">
+            <i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-link fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Record life
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;文章
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;文章分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2021/05/22/mongodb%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/">
+        mongodb一些简单操作笔记
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="/" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p></p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-05-22</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/mongo/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>mongo</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>学习 mongo 操作的简单笔记，记不住了就来看看。</p>
+<span id="more"></span>
+
+
+<h3 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h3><h4 id="MongoDB-使用-insert-或-save-方法向集合中插入文档，语法如下："><a href="#MongoDB-使用-insert-或-save-方法向集合中插入文档，语法如下：" class="headerlink" title="MongoDB 使用 insert() 或 save() 方法向集合中插入文档，语法如下："></a>MongoDB 使用 insert() 或 save() 方法向集合中插入文档，语法如下：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.insert(document)</span><br><span class="line">或</span><br><span class="line">db.COLLECTION_NAME.save(document)</span><br></pre></td></tr></table></figure>
+
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><ul>
+<li>save()：如果 _id 主键存在则更新数据，如果不存在就插入数据。该方法新版本中已废弃，可以使用 db.collection.insertOne() 或 db.collection.replaceOne() 来代替。</li>
+<li>insert(): 若插入的数据主键已经存在，则会抛 org.springframework.dao.DuplicateKeyException 异常，提示主键重复，不保存当前数据。</li>
+</ul>
+<h5 id="db-collection-insertOne-和-db-collection-insertMany"><a href="#db-collection-insertOne-和-db-collection-insertMany" class="headerlink" title="db.collection.insertOne() 和 db.collection.insertMany()"></a>db.collection.insertOne() 和 db.collection.insertMany()</h5><ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">单个:</span><br><span class="line">db.collection.insertOne(</span><br><span class="line">   &lt;document&gt;,</span><br><span class="line">   &#123;</span><br><span class="line">      writeConcern: &lt;document&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">一个或多个:</span><br><span class="line">db.collection.insertMany(</span><br><span class="line">   [ &lt;document 1&gt; , &lt;document 2&gt;, ... ],</span><br><span class="line">   &#123;</span><br><span class="line">      writeConcern: &lt;document&gt;,</span><br><span class="line">      ordered: &lt;boolean&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数说明：</li>
+</ul>
+<ol>
+<li>document：要写入的文档。</li>
+<li>writeConcern：写入策略，默认为 1，即要求确认写操作，0 是不要求。</li>
+<li>ordered：指定是否按顺序写入，默认 true，按顺序写入。</li>
+</ol>
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><h4 id="db-collection-find-query-projection"><a href="#db-collection-find-query-projection" class="headerlink" title="db.collection.find(query, projection)"></a>db.collection.find(query, projection)</h4><ul>
+<li>query ：可选，使用查询操作符指定查询条件</li>
+<li>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）。</li>
+</ul>
+<h5 id="字段样例"><a href="#字段样例" class="headerlink" title="字段样例:"></a>字段样例:</h5><table>
+<thead>
+<tr>
+<th>_id</th>
+<th>v</th>
+<th>c</th>
+<th>abv</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5efed2b5282700007500040a</td>
+<td>adsd</td>
+<td></td>
+<td>(N&#x2F;A)</td>
+</tr>
+<tr>
+<td>5efed4dd2827000075000433</td>
+<td>(N&#x2F;A)</td>
+<td>c</td>
+<td>(Array) 4 Elements</td>
+</tr>
+<tr>
+<td>5efed4dd2827000075000414</td>
+<td>(N&#x2F;A)</td>
+<td>c</td>
+<td>(Array) 4 Elements</td>
+</tr>
+</tbody></table>
+<ul>
+<li>查询样例:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.test2.find(&#123;v:&quot;adsd&quot;,abv: null&#125;)</span><br><span class="line"></span><br><span class="line">// db.test2.findOne(&#123;v:&quot;adsd&quot;,abv: null&#125;)  // 只返回第一个</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回样例:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>_id</th>
+<th>v</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5efed2b5282700007500040a</td>
+<td>adsd</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><em><strong>结论</strong></em></li>
+</ul>
+<ol>
+<li>null 字段不返回</li>
+<li>空 字段返回 空</li>
+</ol>
+<h4 id="字段比较"><a href="#字段比较" class="headerlink" title="字段比较"></a>字段比较</h4><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>格式</th>
+<th>范例</th>
+<th>RDBMS中的类似语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>等于</td>
+<td>{<code>&lt;key&gt;</code>:<code>&lt;value&gt;</code>}</td>
+<td>db.col.find({“by”:”菜鸟教程”}).pretty()</td>
+<td>where by &#x3D; ‘菜鸟教程’</td>
+</tr>
+<tr>
+<td>小于</td>
+<td>{<code>&lt;key&gt;</code>:{$lt:<value>}}</td>
+<td>db.col.find({“likes”:{$lt:50}}).pretty()</td>
+<td>where likes &lt; 50</td>
+</tr>
+<tr>
+<td>小于或等于</td>
+<td>{<code>&lt;key&gt;</code>:{$lte:<value>}}</td>
+<td>db.col.find({“likes”:{$lte:50}}).pretty()</td>
+<td>where likes &lt;&#x3D; 50</td>
+</tr>
+<tr>
+<td>大于</td>
+<td>{<code>&lt;key&gt;</code>:{$gt:<value>}}</td>
+<td>db.col.find({“likes”:{$gt:50}}).pretty()</td>
+<td>where likes &gt; 50</td>
+</tr>
+<tr>
+<td>大于或等于</td>
+<td>{<code>&lt;key&gt;</code>:{$gte:<value>}}</td>
+<td>db.col.find({“likes”:{$gte:50}}).pretty()</td>
+<td>where likes &gt;&#x3D; 50</td>
+</tr>
+<tr>
+<td>不等于</td>
+<td>{<code>&lt;key&gt;</code>:{$ne:<value>}}</td>
+<td>db.col.find({“likes”:{$ne:50}}).pretty()</td>
+<td>where likes !&#x3D; 50</td>
+</tr>
+</tbody></table>
+<h4 id="and-or"><a href="#and-or" class="headerlink" title="and  or"></a>and  or</h4><ul>
+<li><em><strong>and</strong></em></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.find(&#123;key1:value1, key2:value2&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em><strong>or</strong></em> 查询键 by 值为 菜鸟教程 或键 title 值为 MongoDB 教程 的文档。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.find(&#123;$or:[&#123;&quot;by&quot;:&quot;菜鸟教程&quot;&#125;,&#123;&quot;title&quot;: &quot;MongoDB 教程&quot;&#125;]&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em><strong>联合使用</strong></em>  类似常规 SQL 语句为： ‘where likes&gt;50 AND (by &#x3D; ‘菜鸟教程’ OR title &#x3D; ‘MongoDB 教程’)’</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.find(&#123;&quot;likes&quot;: &#123;$gt:50&#125;, $or: [&#123;&quot;by&quot;: &quot;菜鸟教程&quot;&#125;,&#123;&quot;title&quot;: &quot;MongoDB 教程&quot;&#125;]&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<h4 id="分页处理"><a href="#分页处理" class="headerlink" title="分页处理"></a>分页处理</h4><ul>
+<li>类似mysql的 limit offset</li>
+<li>使用 limit(输出文档的行数) skip(跳过的文档行数)</li>
+</ul>
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><ul>
+<li>sort({KEY:1}) 升序</li>
+<li>sort({KEY:-1}) 降序</li>
+</ul>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><ul>
+<li>语法 : db.collection.createIndex(keys, options)</li>
+<li>说明 : Key 值为你要创建的索引字段，1 为指定按升序创建索引，如果你想按降序来创建索引指定为 -1 即可。</li>
+<li>实例：<br><code>db.col.createIndex(&#123;&quot;title&quot;:1&#125;)</code></li>
+<li><em><strong>多个字段创建索引(复合索引)</strong></em></li>
+<li>实例：<br><code>db.col.createIndex(&#123;&quot;title&quot;:1,&quot;description&quot;:-1&#125;)</code></li>
+<li>可选参数列表:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background</td>
+<td>Boolean</td>
+<td>建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引，即增加 “background” 可选参数。 “background” 默认值为false。</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>Boolean</td>
+<td>建立的索引是否唯一。指定为true创建唯一索引。默认值为false.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称。</td>
+</tr>
+<tr>
+<td>dropDups</td>
+<td>Boolean</td>
+<td>3.0+版本已废弃。在建立唯一索引时是否删除重复记录,指定 true 创建唯一索引。默认值为 false.</td>
+</tr>
+<tr>
+<td>sparse</td>
+<td>Boolean</td>
+<td>对文档中不存在的字段数据不启用索引；这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false.</td>
+</tr>
+<tr>
+<td>expireAfterSeconds</td>
+<td>integer</td>
+<td>指定一个以秒为单位的数值，完成 TTL设定，设定集合的生存时间。</td>
+</tr>
+<tr>
+<td>v</td>
+<td>index version</td>
+<td>索引的版本号。默认的索引版本取决于mongod创建索引时运行的版本。</td>
+</tr>
+<tr>
+<td>weights</td>
+<td>document</td>
+<td>索引权重值，数值在 1 到 99,999 之间，表示该索引相对于其他索引字段的得分权重。</td>
+</tr>
+<tr>
+<td>default_language</td>
+<td>string</td>
+<td>对于文本索引，该参数决定了停用词及词干和词器的规则的列表。 默认为英语</td>
+</tr>
+<tr>
+<td>language_override</td>
+<td>string</td>
+<td>对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的language，默认值为 language.</td>
+</tr>
+</tbody></table>
+<ul>
+<li>后台创建索引实例<br><code>db.values.createIndex(&#123;open: 1, close: 1&#125;, &#123;background: true&#125;)</code></li>
+</ul>
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><h4 id="update-和-save"><a href="#update-和-save" class="headerlink" title="update() 和 save()"></a>update() 和 save()</h4><ul>
+<li>update()语法：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.collection.update(</span><br><span class="line">   &lt;query&gt;,</span><br><span class="line">   &lt;update&gt;,</span><br><span class="line">   &#123;</span><br><span class="line">     upsert: &lt;boolean&gt;,</span><br><span class="line">     multi: &lt;boolean&gt;,</span><br><span class="line">     writeConcern: &lt;document&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数说明：</li>
+</ul>
+<ol>
+<li>query : update的查询条件，类似sql update查询内where后面的。</li>
+<li>update : update的对象和一些更新的操作符（如$,$inc…）等，也可以理解为sql update查询内set后面的</li>
+<li>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。</li>
+<li>multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。</li>
+<li>writeConcern :可选，抛出异常的级别。</li>
+</ol>
+<ul>
+<li>更新样例</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.test2.update(</span><br><span class="line">&#123;v:&quot;vvv&quot;&#125;,  // 条件 v = &quot;vvv&quot;</span><br><span class="line">&#123;$set:&#123;v:&quot;aaa&quot;,abv:&quot;asd&quot;&#125;&#125;, //set v=&quot;aaa&quot; and abv= &quot;asd&quot;</span><br><span class="line">    &#123;</span><br><span class="line">    upsert: true,  //不存在就添加</span><br><span class="line">    multi:true      //更新多条</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>省略 upsert ,multi …</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.test2.update(</span><br><span class="line">&#123;v:&quot;aaa&quot;&#125;,</span><br><span class="line">&#123;$set:&#123;v:&quot;azxxc&quot;&#125;&#125;,</span><br><span class="line"></span><br><span class="line">true,</span><br><span class="line">true</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="sava-通过传入的文档来替换已有文档，-id-主键存在就更新，不存在就插入。语法格式如下："><a href="#sava-通过传入的文档来替换已有文档，-id-主键存在就更新，不存在就插入。语法格式如下：" class="headerlink" title="sava() 通过传入的文档来替换已有文档，_id 主键存在就更新，不存在就插入。语法格式如下："></a>sava() 通过传入的文档来替换已有文档，_id 主键存在就更新，不存在就插入。语法格式如下：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.collection.save(</span><br><span class="line">   &lt;document&gt;,</span><br><span class="line">   &#123;</span><br><span class="line">     writeConcern: &lt;document&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数说明：</li>
+</ul>
+<ol>
+<li>document : 文档数据。</li>
+<li>writeConcern :可选，抛出异常的级别。</li>
+</ol>
+<ul>
+<li>样例:</li>
+<li>带 ObjectId</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.test2.save(</span><br><span class="line">&#123;&quot;_id&quot;:ObjectId(&quot;5efee712e5ca213e2735928c&quot;),</span><br><span class="line"> v :&quot;qwerr&quot;</span><br><span class="line">&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不带 ObjectId</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.test2.save(</span><br><span class="line">&#123;&quot;_id&quot;:&quot;5efee712e5ca213e2735928c&quot;,</span><br><span class="line"> v :&quot;qwerr&quot;</span><br><span class="line">&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em><strong>ObjectId</strong></em> 必填，否则第一次save会变成添加，第二次sava才能识别</li>
+</ul>
+<h4 id="更多实例"><a href="#更多实例" class="headerlink" title="更多实例:"></a>更多实例:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">只更新第一条记录：</span><br><span class="line">db.col.update( &#123; &quot;count&quot; : &#123; $gt : 1 &#125; &#125; , &#123; $set : &#123; &quot;test2&quot; : &quot;OK&quot;&#125; &#125; );</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全部更新：</span><br><span class="line">db.col.update( &#123; &quot;count&quot; : &#123; $gt : 3 &#125; &#125; , &#123; $set : &#123; &quot;test2&quot; : &quot;OK&quot;&#125; &#125;,false,true );</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">只添加第一条：</span><br><span class="line">db.col.update( &#123; &quot;count&quot; : &#123; $gt : 4 &#125; &#125; , &#123; $set : &#123; &quot;test5&quot; : &quot;OK&quot;&#125; &#125;,true,false );</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全部添加进去:</span><br><span class="line">db.col.update( &#123; &quot;count&quot; : &#123; $gt : 5 &#125; &#125; , &#123; $set : &#123; &quot;test5&quot; : &quot;OK&quot;&#125; &#125;,true,true );</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全部更新：</span><br><span class="line">db.col.update( &#123; &quot;count&quot; : &#123; $gt : 15 &#125; &#125; , &#123; $inc : &#123; &quot;count&quot; : 1&#125; &#125;,false,true );</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">只更新第一条记录：</span><br><span class="line">db.col.update( &#123; &quot;count&quot; : &#123; $gt : 10 &#125; &#125; , &#123; $inc : &#123; &quot;count&quot; : 1&#125; &#125;,false,false );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><h4 id="remove-方法的基本语法格式如下所示："><a href="#remove-方法的基本语法格式如下所示：" class="headerlink" title="remove() 方法的基本语法格式如下所示："></a>remove() 方法的基本语法格式如下所示：</h4><ul>
+<li>2.6版本之前:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collection.remove(</span><br><span class="line">   &lt;query&gt;,</span><br><span class="line">   &lt;justOne&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.6 版本之后:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.collection.remove(</span><br><span class="line">   &lt;query&gt;,</span><br><span class="line">   &#123;</span><br><span class="line">     justOne: &lt;boolean&gt;,</span><br><span class="line">     writeConcern: &lt;document&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数说明：</li>
+</ul>
+<ol>
+<li>query :（可选）删除的文档的条件。</li>
+<li>justOne : （可选）如果设为 true 或 1，则只删除一个文档，如果不设置该参数，或使用默认值 false，则删除所有匹配条件的文档。</li>
+<li>writeConcern :（可选）抛出异常的级别。</li>
+</ol>
+<ul>
+<li>操作样例:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.test2.remove(</span><br><span class="line">&#123;v:&quot;a&quot;&#125;</span><br><span class="line">false</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回结果:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WriteResult(&#123; &quot;nRemoved&quot; : 2, &quot;writeConcernError&quot; : [ ] &#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="remove-方法已经过时了，现在官方推荐使用-deleteOne-和-deleteMany-方法"><a href="#remove-方法已经过时了，现在官方推荐使用-deleteOne-和-deleteMany-方法" class="headerlink" title="remove() 方法已经过时了，现在官方推荐使用 deleteOne() 和 deleteMany() 方法"></a>remove() 方法已经过时了，现在官方推荐使用 deleteOne() 和 deleteMany() 方法</h4><ul>
+<li>如删除集合下全部文档：<br><code>db.inventory.deleteMany(&#123;&#125;)</code></li>
+<li>删除 status 等于 A 的全部文档：<br><code>db.inventory.deleteMany(&#123; status : &quot;A&quot; &#125;)</code></li>
+<li>删除 status 等于 D 的一个文档：<br><code>db.inventory.deleteOne( &#123; status: &quot;D&quot; &#125; )</code></li>
+</ul>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>remove() 方法 并不会真正释放空间。需要继续执行 db.repairDatabase() 来回收磁盘空间。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.repairDatabase()</span><br><span class="line">或者</span><br><span class="line">db.runCommand(&#123; repairDatabase: 1 &#125;)</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-01-20T17:31:55+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2022年1月20日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/mongo/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>mongo</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2021/06/25/mongodb%E4%B8%8Egolang%E7%9A%84%E6%98%A0%E5%B0%84%E7%AC%94%E8%AE%B0/" rel="prev" title="mongodb之golang官方驱动包bson对象笔记">
+                                
+                                    mongodb之golang官方驱动包bson对象笔记
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/golang/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> golang</a> <a class="tag" href="/tags/mongo/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mongo</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/11/20/redis-%E7%9A%84%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" rel="prev" title="redis 的其他笔记">
+                                  
+                                      redis 的其他笔记
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/redis/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> redis</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'mongodb一些简单操作笔记',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://avatars0.githubusercontent.com/u/40712505?s=460&v=4'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:1173904005@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/yantao1995"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%96%87%E6%A1%A3"><span class="toc-text">插入文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MongoDB-%E4%BD%BF%E7%94%A8-insert-%E6%88%96-save-%E6%96%B9%E6%B3%95%E5%90%91%E9%9B%86%E5%90%88%E4%B8%AD%E6%8F%92%E5%85%A5%E6%96%87%E6%A1%A3%EF%BC%8C%E8%AF%AD%E6%B3%95%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">MongoDB 使用 insert() 或 save() 方法向集合中插入文档，语法如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-text">区别</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#db-collection-insertOne-%E5%92%8C-db-collection-insertMany"><span class="toc-text">db.collection.insertOne() 和 db.collection.insertMany()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="toc-text">查询文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#db-collection-find-query-projection"><span class="toc-text">db.collection.find(query, projection)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E6%A0%B7%E4%BE%8B"><span class="toc-text">字段样例:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E6%AF%94%E8%BE%83"><span class="toc-text">字段比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#and-or"><span class="toc-text">and  or</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E5%A4%84%E7%90%86"><span class="toc-text">分页处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-text">排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3"><span class="toc-text">更新文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#update-%E5%92%8C-save"><span class="toc-text">update() 和 save()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sava-%E9%80%9A%E8%BF%87%E4%BC%A0%E5%85%A5%E7%9A%84%E6%96%87%E6%A1%A3%E6%9D%A5%E6%9B%BF%E6%8D%A2%E5%B7%B2%E6%9C%89%E6%96%87%E6%A1%A3%EF%BC%8C-id-%E4%B8%BB%E9%94%AE%E5%AD%98%E5%9C%A8%E5%B0%B1%E6%9B%B4%E6%96%B0%EF%BC%8C%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%B0%B1%E6%8F%92%E5%85%A5%E3%80%82%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">sava() 通过传入的文档来替换已有文档，_id 主键存在就更新，不存在就插入。语法格式如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E5%AE%9E%E4%BE%8B"><span class="toc-text">更多实例:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="toc-text">删除文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#remove-%E6%96%B9%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F%E5%A6%82%E4%B8%8B%E6%89%80%E7%A4%BA%EF%BC%9A"><span class="toc-text">remove() 方法的基本语法格式如下所示：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#remove-%E6%96%B9%E6%B3%95%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%97%B6%E4%BA%86%EF%BC%8C%E7%8E%B0%E5%9C%A8%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-deleteOne-%E5%92%8C-deleteMany-%E6%96%B9%E6%B3%95"><span class="toc-text">remove() 方法已经过时了，现在官方推荐使用 deleteOne() 和 deleteMany() 方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">知识点</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于我
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/es/" href="/categories/es/"><div class='name'>es</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class='name'>kafka</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/mongo/" href="/categories/mongo/"><div class='name'>mongo</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class='name'>redis</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/zookeeper/" href="/categories/zookeeper/"><div class='name'>zookeeper</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/algor/" style="font-size: 14px; color: #999">algor</a> <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/es/" style="font-size: 14px; color: #999">es</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 16.5px; color: #888">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go%E6%97%A5%E5%B8%B8/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/hash/" style="font-size: 14px; color: #999">hash</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/linux/" style="font-size: 19px; color: #777">linux</a> <a href="/tags/list/" style="font-size: 14px; color: #999">list</a> <a href="/tags/mongo/" style="font-size: 16.5px; color: #888">mongo</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 21.5px; color: #666">redis</a> <a href="/tags/sds/" style="font-size: 14px; color: #999">sds</a> <a href="/tags/set/" style="font-size: 14px; color: #999">set</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #999">zookeeper</a> <a href="/tags/zset/" style="font-size: 14px; color: #999">zset</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 14px; color: #999">笔记</a> <a href="/tags/%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/" style="font-size: 14px; color: #999">镜像扫描</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p>扬帆起航的小白一枚</p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:1173904005@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/yantao1995"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

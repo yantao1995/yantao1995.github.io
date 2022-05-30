@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>一颗精简的前缀树设计 | Record life</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>Record life</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+            
+            id="archives">
+            <i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-link fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Record life
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;文章
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-code-branch fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;文章分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于我
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2021/09/21/%E4%B8%80%E9%A2%97%E7%B2%BE%E7%AE%80%E7%9A%84%E5%89%8D%E7%BC%80%E6%A0%91%E8%AE%BE%E8%AE%A1/">
+        一颗精简的前缀树设计
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="/" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p></p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-09-21</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/golang/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>golang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>做题有感：一道键值映射背后的前缀树。</p>
+<span id="more"></span>
+
+<h6 id="leetcode第677题-（键值映射）"><a href="#leetcode第677题-（键值映射）" class="headerlink" title="leetcode第677题 （键值映射）"></a>leetcode第677题 （键值映射）</h6><ul>
+<li>实现一个 MapSum 类，支持两个方法，insert 和 sum：<ul>
+<li>MapSum() 初始化 MapSum 对象</li>
+<li>void insert(String key, int val) 插入 key-val 键值对，字符串表示键 key ，整数表示值 val 。如果键 key 已经存在，那么原来的键值对将被替代成新的键值对。</li>
+<li>int sum(string prefix) 返回所有以该前缀 prefix 开头的键 key 的值的总和。</li>
+</ul>
+</li>
+<li>提示：<ul>
+<li>1 &lt;&#x3D; key.length, prefix.length &lt;&#x3D; 50</li>
+<li>key 和 prefix 仅由小写英文字母组成</li>
+<li>1 &lt;&#x3D; val &lt;&#x3D; 1000</li>
+<li>最多调用 50 次 insert 和 sum</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[&quot;MapSum&quot;, &quot;insert&quot;, &quot;sum&quot;, &quot;insert&quot;, &quot;sum&quot;]</span><br><span class="line">[[], [&quot;apple&quot;, 3], [&quot;ap&quot;], [&quot;app&quot;, 2], [&quot;ap&quot;]]</span><br><span class="line">输出：</span><br><span class="line">[null, null, 3, null, 5]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">MapSum mapSum = new MapSum();</span><br><span class="line">mapSum.insert(&quot;apple&quot;, 3);  </span><br><span class="line">mapSum.sum(&quot;ap&quot;);           // return 3 (apple = 3)</span><br><span class="line">mapSum.insert(&quot;app&quot;, 2);    </span><br><span class="line">mapSum.sum(&quot;ap&quot;);           // return 5 (apple + app = 3 + 2 = 5)</span><br></pre></td></tr></table></figure>
+
+<h6 id="思路"><a href="#思路" class="headerlink" title="思路 :"></a>思路 :</h6><ul>
+<li>因为相同的前缀下的所有值要求一个总和，并且可以替换当前已经有的值。如果仅用一个map计数的话，需要遍历整个map来做字符串匹配。</li>
+<li>所以此处选择使用前缀树来实现。又由于root根结点可能存在多个。所有在初始化时，返回了一个root的上层结点来保存所有的根结点。</li>
+<li>使用前缀树，则需要标识，哪些结点是真正的单词，哪些结点只是共有的父节点。所以结点中应该包含标识，以及如果是单词结点，则包含对应的val。</li>
+<li>获取值时，使用内置双向链表list，前取后加，作为队列来实现广度遍历</li>
+</ul>
+<h6 id="实现"><a href="#实现" class="headerlink" title="实现 :"></a>实现 :</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">type MapSum struct &#123;</span><br><span class="line">	isWords bool</span><br><span class="line">	val     int</span><br><span class="line">	NextMap map[byte]*MapSum //前缀树</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Constructor() MapSum &#123;</span><br><span class="line">	return MapSum&#123;</span><br><span class="line">		isWords: false,</span><br><span class="line">		val:     0,</span><br><span class="line">		NextMap: map[byte]*MapSum&#123;&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (this *MapSum) Insert(key string, val int) &#123;</span><br><span class="line">	that := this</span><br><span class="line">	for i := 0; i &lt; len(key); i++ &#123;</span><br><span class="line">		if _, ok := that.NextMap[key[i]]; !ok &#123;</span><br><span class="line">			that.NextMap[key[i]] = &amp;MapSum&#123;</span><br><span class="line">				isWords: false,</span><br><span class="line">				val:     0,</span><br><span class="line">				NextMap: map[byte]*MapSum&#123;&#125;,</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if i == len(key)-1 &#123;</span><br><span class="line">			that.NextMap[key[i]].isWords = true</span><br><span class="line">			that.NextMap[key[i]].val = val</span><br><span class="line">		&#125;</span><br><span class="line">		that = that.NextMap[key[i]]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (this *MapSum) Sum(prefix string) int &#123;</span><br><span class="line">	total := 0</span><br><span class="line">	that := this</span><br><span class="line">	for k := range prefix &#123;</span><br><span class="line">		if _, ok := that.NextMap[prefix[k]]; !ok &#123;</span><br><span class="line">			return 0</span><br><span class="line">		&#125;</span><br><span class="line">		that = that.NextMap[prefix[k]]</span><br><span class="line">	&#125;</span><br><span class="line">	queue := list.New()</span><br><span class="line">	queue.PushBack(that)</span><br><span class="line">	for queue.Len() &gt; 0 &#123;</span><br><span class="line">		element := queue.Front()</span><br><span class="line">		if ms, ok := element.Value.(*MapSum); ok &amp;&amp; ms != nil &#123;</span><br><span class="line">			if ms.isWords &#123;</span><br><span class="line">				total += ms.val</span><br><span class="line">			&#125;</span><br><span class="line">			for k := range ms.NextMap &#123;</span><br><span class="line">				queue.PushBack(ms.NextMap[k])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		queue.Remove(element)</span><br><span class="line">	&#125;</span><br><span class="line">	return total</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以优化的点：每个结点中可以增加一个字段<code>totalVal</code>来存所有子节点的累积值，父结点 <code>isWords == true</code> 的时候，可以在 <code>insert</code> 的时候就累加 val 进去。 这样子结点获取的时候，不需要再逐一向下遍历。但是需要注意的是，如果该结点为替换值的操作，则需要向上层操作所有为单词的结点。</li>
+</ul>
+
+      </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-30T21:22:50+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2022年5月30日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/go/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>go</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/algor/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>algor</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2021/12/20/zookeeper-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E7%AC%94%E8%AE%B0/" rel="prev" title="zookeeper 集群搭建笔记">
+                                
+                                    zookeeper 集群搭建笔记
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/zookeeper/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> zookeeper</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2021/06/25/mongodb%E4%B8%8Egolang%E7%9A%84%E6%98%A0%E5%B0%84%E7%AC%94%E8%AE%B0/" rel="prev" title="mongodb之golang官方驱动包bson对象笔记">
+                                  
+                                      mongodb之golang官方驱动包bson对象笔记
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/golang/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> golang</a> <a class="tag" href="/tags/mongo/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mongo</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '一颗精简的前缀树设计',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://avatars0.githubusercontent.com/u/40712505?s=460&v=4'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:1173904005@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/yantao1995"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#leetcode%E7%AC%AC677%E9%A2%98-%EF%BC%88%E9%94%AE%E5%80%BC%E6%98%A0%E5%B0%84%EF%BC%89"><span class="toc-text">leetcode第677题 （键值映射）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路 :</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现 :</span></a></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于我
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/es/" href="/categories/es/"><div class='name'>es</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/golang/" href="/categories/golang/"><div class='name'>golang</div><div class='badge'>(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class='name'>java</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/k8s/" href="/categories/k8s/"><div class='name'>k8s</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class='name'>kafka</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/mongo/" href="/categories/mongo/"><div class='name'>mongo</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class='name'>redis</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/zookeeper/" href="/categories/zookeeper/"><div class='name'>zookeeper</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/algor/" style="font-size: 14px; color: #999">algor</a> <a href="/tags/channel/" style="font-size: 14px; color: #999">channel</a> <a href="/tags/clair/" style="font-size: 14px; color: #999">clair</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/es/" style="font-size: 14px; color: #999">es</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/golang/" style="font-size: 16.5px; color: #888">golang</a> <a href="/tags/gorm/" style="font-size: 14px; color: #999">gorm</a> <a href="/tags/go%E6%97%A5%E5%B8%B8/" style="font-size: 14px; color: #999">go日常</a> <a href="/tags/hash/" style="font-size: 14px; color: #999">hash</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/linux/" style="font-size: 19px; color: #777">linux</a> <a href="/tags/list/" style="font-size: 14px; color: #999">list</a> <a href="/tags/mongo/" style="font-size: 16.5px; color: #888">mongo</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/orm/" style="font-size: 14px; color: #999">orm</a> <a href="/tags/redis/" style="font-size: 21.5px; color: #666">redis</a> <a href="/tags/sds/" style="font-size: 14px; color: #999">sds</a> <a href="/tags/set/" style="font-size: 14px; color: #999">set</a> <a href="/tags/slice/" style="font-size: 14px; color: #999">slice</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #999">zookeeper</a> <a href="/tags/zset/" style="font-size: 14px; color: #999">zset</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 14px; color: #999">切片</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 14px; color: #999">笔记</a> <a href="/tags/%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/" style="font-size: 14px; color: #999">镜像扫描</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p>扬帆起航的小白一枚</p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:1173904005@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/yantao1995"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
